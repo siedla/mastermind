@@ -1,17 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
- fx:controller="pl.edu.agh.to.mastermind.controller.BoardSceneController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.agh.to.mastermind.controller.BoardSceneController">
    <VBox prefHeight="200.0" prefWidth="200.0">
-      <RadioButton mnemonicParsing="false" text="niebieski" />
-      <RadioButton mnemonicParsing="false" text="żółty" />
-      <RadioButton mnemonicParsing="false" text="zielony" />
-      <RadioButton mnemonicParsing="false" text="czerwony" />
+
+      <Circle fx:id="c0" fill="#212999" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="c1" fill="#eaed0c" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="c2" fill="#16bf07" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="c3" fill="#f40000" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
    </VBox>
-   <VBox prefHeight="200.0" prefWidth="600.0" />
+   <VBox prefHeight="200.0" prefWidth="400.0">
+      <children>
+         <AnchorPane fx:id="try9" prefHeight="200.0" prefWidth="200.0">
+            <children>
+               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            </children>
+         </AnchorPane>
+         <AnchorPane fx:id="try8" prefHeight="200.0" prefWidth="200.0">
+            <children>
+               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            </children>
+         </AnchorPane>
+         <AnchorPane fx:id="try7" prefHeight="200.0" prefWidth="200.0">
+            <children>
+               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            </children>
+         </AnchorPane>
+         <AnchorPane fx:id="try6" prefHeight="200.0" prefWidth="200.0">
+            <children>
+               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            </children>
+         </AnchorPane>
+         <AnchorPane fx:id="try5" prefHeight="200.0" prefWidth="200.0">
+            <children>
+               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            </children>
+         </AnchorPane>
+         <AnchorPane fx:id="try4" prefHeight="200.0" prefWidth="200.0">
+            <children>
+               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            </children>
+         </AnchorPane>
+         <AnchorPane fx:id="try3" prefHeight="200.0" prefWidth="200.0">
+            <children>
+               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            </children>
+         </AnchorPane>
+         <AnchorPane fx:id="try2" prefHeight="200.0" prefWidth="200.0">
+            <children>
+               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            </children>
+         </AnchorPane>
+         <AnchorPane  fx:id="try1" prefHeight="200.0" prefWidth="200.0">
+            <children>
+               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            </children>
+         </AnchorPane>
+         <AnchorPane fx:id="try0" prefHeight="200.0" prefWidth="200.0">
+            <children>
+               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            </children>
+         </AnchorPane>
+      </children></VBox>
+   <VBox prefHeight="700.0" prefWidth="190.0" />
    <VBox prefHeight="200.0" prefWidth="200.0">
       <HBox prefHeight="30.0" prefWidth="400.0">
          <Label text="Czas gry: " />
@@ -25,7 +113,7 @@
          <Label text="Poziom trudności:" />
          <Label fx:id="difficultyLabel" />
       </HBox>
-      <Button fx:id="endRoundButton" onAction="#onEndRoundButtonClick" mnemonicParsing="false" text="Zakończ rundę" />
-      <Button fx:id="newGameButton" onAction="#onNewGameButtonClick" mnemonicParsing="false" text="Nowa gra" />
+      <Button fx:id="endRoundButton" mnemonicParsing="false" onAction="#onEndRoundButtonClick" text="Zakończ rundę" />
+      <Button fx:id="newGameButton" mnemonicParsing="false" onAction="#onNewGameButtonClick" text="Nowa gra" />
    </VBox>
 </HBox>
