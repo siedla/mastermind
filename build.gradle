@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
+}
+
+description = """
+Mastermind project a TO course.
+
+Project name: ${project.name}
+
+Authors:
+Piotr Makarewicz
+Marcin Malcher
+Maciej Kazalski
+Michał Siedlanowski
+"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+version = '0.1'
+
+mainClassName = 'pl.edu.agh.to.mastermind.MastermindApplication'
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "17"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+dependencies {
+    testImplementation('junit:junit:4.13')
+}
