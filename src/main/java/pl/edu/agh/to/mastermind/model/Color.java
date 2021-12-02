@@ -7,5 +7,6 @@ public enum Color {
     YELLOW,
     ORANGE,
     BLACK,
-    WHITE
+    WHITE,
+    INVALID
 }

@@ -1,25 +1,53 @@
 package pl.edu.agh.to.mastermind.model;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class Code {
-    private LinkedList<Color> colors = new LinkedList<>();
+    private List<Color> colors = new LinkedList<>();
 
-    public LinkedList<Color> getColors() {
+    public Code()
+    {
+        this.colors = new LinkedList<Color>();
+    }
+    public Code(List<Color> colors)
+    {
+        this.colors = colors;
+    }
+
+    public List<Color> getColors() {
         return colors;
     }
 
     public GuessResult check(Code guessCode) {
+        if(this.colors.size() != guessCode.colors.size())
+            return new GuessResult(0,0);
+
+        var slotUsed = new boolean[4];
+        var otherColors = guessCode.getColors();
+
         int guessedCorrectly = 0;
         int guessedInDifferentPlace = 0;
-        for(int i=0; i<colors.size(); i++) {
-            if(colors.get(i) == guessCode.getColors().get(i)) {
-                guessedCorrectly++;
-            }
-            else if(guessCode.getColors().contains(colors.get(i))){
-                guessedInDifferentPlace++;
+
+        for(int i=0;i<otherColors.size();++i)
+        {
+            if(otherColors.get(i) == colors.get(i))
+            {
+                guessedCorrectly+=1;
+                slotUsed[i]=true;
             }
         }
+
+        for (Color otherColor : otherColors) {
+            for (int j = 0; j < colors.size(); ++j) {
+                if (otherColor == colors.get(j) && !slotUsed[j]) {
+                    guessedInDifferentPlace += 1;
+                    slotUsed[j] = true;
+                    break;
+                }
+            }
+        }
+
         return new GuessResult(guessedCorrectly, guessedInDifferentPlace);
     }
 }
