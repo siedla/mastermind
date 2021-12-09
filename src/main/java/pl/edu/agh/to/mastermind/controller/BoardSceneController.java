@@ -96,11 +96,11 @@ public class BoardSceneController {
             Code code = new Code(guessedCode);
 
             GuessResult CurrentGuess = gameStateModel.getCode().check(code);
-            System.out.println(CurrentGuess.getGuessedCorrectly()+"  "+CurrentGuess.getGuessedInDifferentPlace());
+
             for(int i=0; i<CurrentGuess.getGuessedCorrectly(); i++){
                 ((Circle) guess[gameStateModel.getCurrentRound()-1].getChildren().get(i)).setFill(Colors.BLACK.getValue());
             }
-            for(int i=CurrentGuess.getGuessedCorrectly(); i<CurrentGuess.getGuessedInDifferentPlace(); i++){
+            for(int i=CurrentGuess.getGuessedCorrectly(); i<CurrentGuess.getGuessedInDifferentPlace()+CurrentGuess.getGuessedCorrectly(); i++){
                 ((Circle) guess[gameStateModel.getCurrentRound()-1].getChildren().get(i)).setFill(Colors.WHITE.getValue());
             }
             gameStateModel.nextRound(new Round(code, CurrentGuess));

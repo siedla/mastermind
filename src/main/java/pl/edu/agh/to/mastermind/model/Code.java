@@ -29,6 +29,7 @@ public class Code {
         }
         for(int i=0; i<4; i++){
             if(t[i] != 1){
+
                 for(int j=0; j<4; j++){
                     if(colors.get(i).equals(guessCode.getColors().get(j)) && t[i]!=-1){
                         t[i] = -1;
