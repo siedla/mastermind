@@ -8,4 +8,12 @@ public class GuessResult {
         this.guessedCorrectly = guessedCorrectly;
         this.guessedInDifferentPlace = guessedInDifferentPlace;
     }
+
+    public int getGuessedCorrectly() {
+        return guessedCorrectly;
+    }
+
+    public int getGuessedInDifferentPlace() {
+        return guessedInDifferentPlace;
+    }
 }

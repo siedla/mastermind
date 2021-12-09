@@ -3,7 +3,10 @@ package pl.edu.agh.to.mastermind;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import pl.edu.agh.to.mastermind.controller.BoardSceneController;
+import pl.edu.agh.to.mastermind.model.GameState;
 
 import java.util.logging.Logger;
 
@@ -20,10 +23,14 @@ public class MastermindApplication extends Application {
         primaryStage.setTitle("MASTERMIND by Kwadratowe Kafelki");
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
+        var fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getClassLoader().getResource("boardScene.fxml"));
 
         Scene boardScene = new Scene(fxmlLoader.load());
+        var game = new GameState();
+        BoardSceneController boardSceneController = fxmlLoader.getController();
+
+        boardSceneController.setGameStateModel(game);
 
         primaryStage.setScene(boardScene);
         primaryStage.show();
