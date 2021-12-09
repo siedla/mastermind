@@ -1,50 +1,51 @@
 package pl.edu.agh.to.mastermind.model;
 
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-
 import java.util.LinkedList;
+import java.util.List;
 
 public class Code {
-    private LinkedList<Colors> colors;
 
-    public Code(LinkedList<Colors> colors) {
+    private List<Colors> colors;
+
+    public Code() {
+        this.colors = new LinkedList<Colors>();
+    }
+
+    public Code(List<Colors> colors) {
         this.colors = colors;
     }
 
-    public LinkedList<Colors> getColors() {
+    public List<Colors> getColors() {
         return colors;
     }
 
     public GuessResult check(Code guessCode) {
+        if (this.colors.size() != guessCode.colors.size())
+            return new GuessResult(0, 0);
+
+        var slotUsed = new boolean[colors.size()];
+        var otherColors = guessCode.getColors();
+
         int guessedCorrectly = 0;
         int guessedInDifferentPlace = 0;
-        int t[] = new int[]{0,0,0,0};
 
-        for(int i=0; i<4; i++) {
-            if(colors.get(i).equals(guessCode.getColors().get(i))) {
-                t[i] = 1;
-
+        for (int i = 0; i < otherColors.size(); ++i) {
+            if (otherColors.get(i) == colors.get(i)) {
+                guessedCorrectly += 1;
+                slotUsed[i] = true;
             }
         }
-        for(int i=0; i<4; i++){
-            if(t[i] != 1){
 
-                for(int j=0; j<4; j++){
-                    if(colors.get(i).equals(guessCode.getColors().get(j)) && t[i]!=-1){
-                        t[i] = -1;
-                        break;
-                    }
+        for (Colors otherColor : otherColors) {
+            for (int j = 0; j < colors.size(); ++j) {
+                if (otherColor == colors.get(j) && !slotUsed[j]) {
+                    guessedInDifferentPlace += 1;
+                    slotUsed[j] = true;
+                    break;
                 }
             }
+        }
 
-        }
-        for(int i=0; i<4; i++){
-            if(t[i] == 1)
-                guessedCorrectly++;
-            else if(t[i] == -1)
-                guessedInDifferentPlace++;
-        }
         return new GuessResult(guessedCorrectly, guessedInDifferentPlace);
     }
 }

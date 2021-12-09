@@ -11,11 +11,12 @@ public enum Colors {
     GREEN(Color.GREEN),
     BLUE(Color.BLUE),
     YELLOW(Color.YELLOW),
+    ORANGE(Color.ORANGE),
     BLACK(Color.BLACK),
     WHITE(Color.WHITE);
 
     private final Paint value;
-    private static Map map = new HashMap<>();
+    private static Map map = new HashMap<Colors, Color>();
 
     Colors(Paint value) {
         this.value = value;
