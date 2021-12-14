@@ -9,15 +9,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import pl.edu.agh.to.mastermind.MastermindApplication;
 import pl.edu.agh.to.mastermind.model.*;
 
 import java.util.LinkedList;
 
-public class BoardSceneController {
+public class BoardController extends Controller{
 
     private GameState gameStateModel;
 
-    public BoardSceneController() {}
+
+    public BoardController() {
+    }
 
     @FXML
     private Label difficultyLabel;

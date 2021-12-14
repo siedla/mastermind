@@ -1,38 +1,28 @@
 package pl.edu.agh.to.mastermind;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import pl.edu.agh.to.mastermind.controller.BoardSceneController;
+import pl.edu.agh.to.mastermind.controller.BoardController;
+import pl.edu.agh.to.mastermind.controller.SceneEnum;
+import pl.edu.agh.to.mastermind.controller.SceneManager;
 import pl.edu.agh.to.mastermind.model.GameState;
 
 import java.util.logging.Logger;
 
 public class MastermindApplication extends Application {
     private static final Logger log = Logger.getLogger(MastermindApplication.class.toString());
+    private SceneManager sceneManager;
 
     public static void main(String[] args) {
         Application.launch(args);
-
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("MASTERMIND by Kwadratowe Kafelki");
-
-
-        var fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getClassLoader().getResource("boardScene.fxml"));
-
-        Scene boardScene = new Scene(fxmlLoader.load());
-        var game = new GameState();
-        BoardSceneController boardSceneController = fxmlLoader.getController();
-
-        boardSceneController.setGameStateModel(game);
-
-        primaryStage.setScene(boardScene);
-        primaryStage.show();
+    public void start(Stage stage) throws Exception {
+        this.sceneManager = new SceneManager(stage);
+        GameState state = new GameState();
+        BoardController boardController = (BoardController) this.sceneManager.getController(SceneEnum.BOARD);
+        boardController.setGameStateModel(state);
+        stage.show();
     }
 }
