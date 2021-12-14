@@ -2,6 +2,9 @@ package pl.edu.agh.to.mastermind.model;
 
 import org.junit.Assert;
 import org.junit.Test;
+import pl.edu.agh.to.mastermind.model.game.Code;
+import pl.edu.agh.to.mastermind.model.game.Colors;
+import pl.edu.agh.to.mastermind.model.game.GuessResult;
 
 import java.util.List;
 

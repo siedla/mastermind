@@ -1,15 +1,15 @@
-package pl.edu.agh.to.mastermind.model;
+package pl.edu.agh.to.mastermind.model.game;
 
 import java.util.LinkedList;
 import java.util.Random;
 
-public class GameState {
+public class Game {
     private int currentRound = 1;
     private LinkedList<Round> rounds = new LinkedList<>();
     private Code code;
     private Random random = new Random();
 
-    public GameState() {
+    public Game() {
         generateCode();
     }
 
@@ -36,9 +36,5 @@ public class GameState {
         return code;
     }
 
-    public void newGame() {
-        this.currentRound=1;
-        this.rounds.clear();
-        generateCode();
-    }
+
 }

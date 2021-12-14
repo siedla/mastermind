@@ -1,4 +1,4 @@
-package pl.edu.agh.to.mastermind.model;
+package pl.edu.agh.to.mastermind.model.game;
 
 public class GuessResult {
     private int guessedCorrectly;

@@ -9,15 +9,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import pl.edu.agh.to.mastermind.MastermindApplication;
-import pl.edu.agh.to.mastermind.model.*;
+import pl.edu.agh.to.mastermind.model.Session;
+import pl.edu.agh.to.mastermind.model.game.*;
 
 import java.util.LinkedList;
 
 public class BoardController extends Controller{
 
-    private GameState gameStateModel;
-
+    private Game game;
+    private Session session;
 
     public BoardController() {
     }
@@ -75,9 +75,9 @@ public class BoardController extends Controller{
     private void onEndRoundButtonClick(ActionEvent event){
 
         boolean allSelected = true;
-        System.out.println(gameStateModel.getCurrentRound()-1);
+        System.out.println(game.getCurrentRound()-1);
         for(int i=0; i<4; i++){
-            if( ((Circle) attempt[gameStateModel.getCurrentRound()-1].getChildren().get(i)).getFill() == Color.LIGHTGRAY){
+            if( ((Circle) attempt[game.getCurrentRound()-1].getChildren().get(i)).getFill() == Color.LIGHTGRAY){
                 allSelected = false;
             }
         }
@@ -92,21 +92,21 @@ public class BoardController extends Controller{
         else{
             LinkedList<Colors> guessedCode= new LinkedList<>();
             for(int i=0; i<4; i++){
-                Paint c = ((Circle) attempt[gameStateModel.getCurrentRound()-1].getChildren().get(i)).getFill();
+                Paint c = ((Circle) attempt[game.getCurrentRound()-1].getChildren().get(i)).getFill();
                 guessedCode.add(Colors.valueOf(c));
 
             }
             Code code = new Code(guessedCode);
 
-            GuessResult CurrentGuess = gameStateModel.getCode().check(code);
+            GuessResult CurrentGuess = game.getCode().check(code);
 
             for(int i=0; i<CurrentGuess.getGuessedCorrectly(); i++){
-                ((Circle) guess[gameStateModel.getCurrentRound()-1].getChildren().get(i)).setFill(Colors.BLACK.getValue());
+                ((Circle) guess[game.getCurrentRound()-1].getChildren().get(i)).setFill(Colors.BLACK.getValue());
             }
             for(int i=CurrentGuess.getGuessedCorrectly(); i<CurrentGuess.getGuessedInDifferentPlace()+CurrentGuess.getGuessedCorrectly(); i++){
-                ((Circle) guess[gameStateModel.getCurrentRound()-1].getChildren().get(i)).setFill(Colors.WHITE.getValue());
+                ((Circle) guess[game.getCurrentRound()-1].getChildren().get(i)).setFill(Colors.WHITE.getValue());
             }
-            gameStateModel.nextRound(new Round(code, CurrentGuess));
+            game.nextRound(new Round(code, CurrentGuess));
         }
     }
 
@@ -118,7 +118,7 @@ public class BoardController extends Controller{
                 ((Circle)guess[i].getChildren().get(j)).setFill(Color.DARKGRAY);
             }
         }
-        gameStateModel.newGame();
+        this.game = session.newGame();
     }
 
 
@@ -149,13 +149,16 @@ public class BoardController extends Controller{
 
     }
 
-    public void setGameStateModel(GameState gameStateModel) {
-        this.gameStateModel = gameStateModel;
+    public void setGame(Game game) {
+        this.game = game;
+    }
+    public void setSession(Session session) {
+        this.session = session;
     }
 
     private void markDetection(Node n, int i) {
         n.setOnMouseClicked(event -> {
-            if(i == gameStateModel.getCurrentRound() && selectedColor!=null){
+            if(i == game.getCurrentRound() && selectedColor!=null){
                 ((Circle) n).setFill(selectedColor);
 
             }
