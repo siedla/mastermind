@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class SceneManager {
     private final Stage stage;
     private final Map<SceneEnum, Scene> scenes = new HashMap<>();
@@ -16,18 +17,20 @@ public class SceneManager {
     public SceneManager(Stage stage) throws Exception {
         this.stage = stage;
         this.loadScenes();
-        this.switchScene(SceneEnum.BOARD);
+        this.switchScene(SceneEnum.LOGIN);
     }
 
     private void loadScenes() throws IOException {
         for (SceneEnum sceneType: SceneEnum.values()){
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getClassLoader().getResource("boardScene.fxml"));
+            fxmlLoader.setLocation(getClass().getClassLoader().getResource(sceneType.getFxmlFileName()));
             Scene scene = new Scene(fxmlLoader.load());
             scenes.put(sceneType, scene);
             Controller controller = fxmlLoader.getController();
             controller.setSceneManager(this);
             controllers.put(sceneType, controller);
+            System.out.println(sceneType);
+            System.out.println(sceneType.getFxmlFileName());
         }
     }
 

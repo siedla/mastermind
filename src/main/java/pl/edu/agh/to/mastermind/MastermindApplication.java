@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 public class MastermindApplication extends Application {
     private static final Logger log = Logger.getLogger(MastermindApplication.class.toString());
+
     private SceneManager sceneManager;
 
     public static void main(String[] args) {
@@ -23,6 +24,7 @@ public class MastermindApplication extends Application {
         GameState state = new GameState();
         BoardController boardController = (BoardController) this.sceneManager.getController(SceneEnum.BOARD);
         boardController.setGameStateModel(state);
+        System.out.println(stage.getScene());
         stage.show();
     }
 }
