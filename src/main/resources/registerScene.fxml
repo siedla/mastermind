@@ -14,7 +14,7 @@
       <PasswordField fx:id="passwordField" layoutX="126.0" layoutY="230.0" prefHeight="25.0" prefWidth="244.0" promptText="password" />
       <TextField fx:id="firstnameField" layoutX="126.0" layoutY="101.0" prefHeight="25.0" prefWidth="244.0" promptText="firstname" />
       <TextField fx:id="emailField" layoutX="126.0" layoutY="188.0" prefHeight="25.0" prefWidth="244.0" promptText="e-mail" />
-      <TextField fx:id="lastnameField1" layoutX="126.0" layoutY="144.0" prefHeight="25.0" prefWidth="244.0" promptText="lastname" />
+      <TextField fx:id="lastnameField" layoutX="126.0" layoutY="144.0" prefHeight="25.0" prefWidth="244.0" promptText="lastname" />
       <VBox>
       <HBox prefHeight="30.0" prefWidth="400.0">
          <Label text="MasterMind">
@@ -30,7 +30,7 @@
                   </font>
       </Label>
       </VBox>
-      <Button layoutX="308.0" layoutY="292.0" mnemonicParsing="false" onAction="#onSignInClick" text="Register" />
+      <Button layoutX="308.0" layoutY="292.0" mnemonicParsing="false" onAction="#onRegisterClick" text="Register" />
       <Button layoutX="23.0" layoutY="292.0" mnemonicParsing="false" onAction="#onReturnClick" text="Login" />
       <Label layoutX="22.0" layoutY="101.0" prefHeight="25.0" prefWidth="95.0" text="First name:" />
       <Label layoutX="22.0" layoutY="144.0" prefHeight="25.0" prefWidth="95.0" text="Last name:" />

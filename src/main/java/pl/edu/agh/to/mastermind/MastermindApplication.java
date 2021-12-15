@@ -18,9 +18,6 @@ public class MastermindApplication extends Application {
 
 
     public static void main(String[] args) throws Exception {
-//        User.register("Jerzy","Nowak","jnow2ak@nn.pl", "blea");
-//        User.register("Ernest","Kowal","eko2wal@nn.pl", "dfda");
-//        User.register("Jakub","Nowak","jak2nowak@nn.pl", "asfd");
         Application.launch(args);
     }
 
