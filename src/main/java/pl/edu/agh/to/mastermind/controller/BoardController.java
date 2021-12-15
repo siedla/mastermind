@@ -117,30 +117,36 @@ public class BoardController extends Controller{
             }
 
             if (CurrentGuess.getGuessedCorrectly() == 4) {
-
-                Alert dialogBox = new Alert(Alert.AlertType.INFORMATION);
-                dialogBox.setTitle("Congratulations! :)");
-                dialogBox.setHeaderText("You win!");
-                dialogBox.setContentText("You managed to win in round "+game.getCurrentRound());
-
-                dialogBox.showAndWait();
-                endRoundButton.setVisible(false);
-                sceneManager.switchScene(SceneEnum.MENU);
+                executeGameWon();
             }
 
             else if (game.getCurrentRound() == 10 && CurrentGuess.getGuessedCorrectly() != 4) {
-
-                Alert dialogBox = new Alert(Alert.AlertType.INFORMATION);
-                dialogBox.setTitle("Game over!");
-                dialogBox.setHeaderText("You lose!");
-                dialogBox.setContentText("You failed to guess the code. Try again!");
-                dialogBox.showAndWait();
-                endRoundButton.setVisible(false);
-                sceneManager.switchScene(SceneEnum.MENU);
+                executeGameLost();
             }
 
             else game.nextRound(new Round(code, CurrentGuess));
         }
+    }
+
+    private void executeGameLost() throws Exception {
+        Alert dialogBox = new Alert(Alert.AlertType.INFORMATION);
+        dialogBox.setTitle("Game over!");
+        dialogBox.setHeaderText("You lose!");
+        dialogBox.setContentText("You failed to guess the code. Try again!");
+        dialogBox.showAndWait();
+        endRoundButton.setVisible(false);
+        sceneManager.switchScene(SceneEnum.MENU);
+    }
+
+    private void executeGameWon() throws Exception {
+        Alert dialogBox = new Alert(Alert.AlertType.INFORMATION);
+        dialogBox.setTitle("Congratulations! :)");
+        dialogBox.setHeaderText("You win!");
+        dialogBox.setContentText("You managed to win in round "+game.getCurrentRound());
+
+        dialogBox.showAndWait();
+        endRoundButton.setVisible(false);
+        sceneManager.switchScene(SceneEnum.MENU);
     }
 
     private void cleanScreenState(){
