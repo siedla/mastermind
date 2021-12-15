@@ -2,9 +2,11 @@ package pl.edu.agh.to.mastermind.controller;
 
 public enum SceneEnum {
     BOARD("boardScene.fxml"),
-    //STATISTICS("statisticsScene.fxml"),
-    LOGIN("loginScene.fxml")
-    //MENU("menuScene.fxml")
+    STATISTICS("statsScene.fxml"),
+    LOGIN("loginScene2.fxml"),
+    REGISTRATION("registerScene.fxml"),
+    MENU("menuScene.fxml"),
+    SETTINGS("settingsScene.fxml")
     ;
 
     private final String fxmlFileName;

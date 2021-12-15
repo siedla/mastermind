@@ -72,6 +72,11 @@ public class BoardController extends Controller{
     private Paint selectedColor;
 
     @FXML
+    private void onMenuClick(ActionEvent event) throws Exception{
+        sceneManager.switchScene(SceneEnum.MENU);
+    }
+
+    @FXML
     private void onEndRoundButtonClick(ActionEvent event){
 
         boolean allSelected = true;

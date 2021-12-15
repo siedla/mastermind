@@ -197,5 +197,6 @@
       </HBox>
       <Button fx:id="endRoundButton" mnemonicParsing="false" onAction="#onEndRoundButtonClick" text="Zakończ rundę" />
       <Button fx:id="newGameButton" mnemonicParsing="false" onAction="#onNewGameButtonClick" text="Nowa gra" />
+      <Button fx:id="menuButton" mnemonicParsing="false" onAction="#onMenuClick" text="Menu" />
    </VBox>
 </HBox>
