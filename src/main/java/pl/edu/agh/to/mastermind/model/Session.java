@@ -4,7 +4,7 @@ import pl.edu.agh.to.mastermind.model.game.Game;
 import pl.edu.agh.to.mastermind.model.user.User;
 
 public class Session {
-    private static User user;
+    private  User user;
     private static Game game;
 
     public Session(){}
@@ -15,7 +15,7 @@ public class Session {
         return game;
     }
 
-    public static void setUser(User user) {
-        Session.user = user;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

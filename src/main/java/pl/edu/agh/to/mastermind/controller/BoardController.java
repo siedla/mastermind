@@ -143,15 +143,18 @@ public class BoardController extends Controller{
         }
     }
 
-    @FXML
-    private void onNewGameButtonClick(ActionEvent event){
+    private void cleanScreenState(){
         for(int i=0; i<10; i++){
             for(int j=0; j<attempt[i].getChildren().size(); j++){
                 ((Circle)attempt[i].getChildren().get(j)).setFill(Color.LIGHTGRAY);
                 ((Circle)guess[i].getChildren().get(j)).setFill(Color.DARKGRAY);
             }
         }
-        this.game = session.newGame();
+    }
+
+    @FXML
+    private void onNewGameButtonClick(ActionEvent event){
+        cleanScreenState();
     }
 
 
@@ -180,6 +183,11 @@ public class BoardController extends Controller{
             }
         }
 
+    }
+
+    public void startNewGame() {
+        cleanScreenState();
+        this.game = this.session.newGame();
     }
 
     public void setGame(Game game) {

@@ -21,15 +21,20 @@ public class LoginController extends Controller{
         String email = emailField.getText();
         String password = passwordField.getText();
         try {
-        if (User.checkPasswordMatch(email, password)){
+            if (User.checkPasswordMatch(email, password)) {
                 User user = User.getUserByEmail(email);
-                Session.setUser(user);
+                //Session.setUser(user);
+
+                var session = new Session();
+                session.setUser(user);
+                BoardController boardController = (BoardController) this.sceneManager.getController(SceneEnum.BOARD);
+                boardController.setSession(session);
                 sceneManager.switchScene(SceneEnum.MENU);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText("Login succeeded");
-            alert.setContentText("You logged in successfully as "+user.getFirstName() + " "+ user.getLastName() +" ("+user.getEmail()+")");
-            alert.show();
-        } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Login succeeded");
+                alert.setContentText("You logged in successfully as " + user.getFirstName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+                alert.show();
+            } else {
            throw new UserManagementException("Passwords don't match");
         }}
         catch (UserManagementException e){

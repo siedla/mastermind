@@ -24,10 +24,6 @@ public class MastermindApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         this.sceneManager = new SceneManager(stage);
-        BoardController boardController = (BoardController) this.sceneManager.getController(SceneEnum.BOARD);
-        boardController.setSession(new Session());
-        boardController.setGame(new Game());
-        System.out.println(stage.getScene());
         stage.show();
     }
 }

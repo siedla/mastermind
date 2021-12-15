@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 public class MenuController extends Controller{
     @FXML
     private void onNewGameClick(ActionEvent event) throws Exception {
+        BoardController boardController = (BoardController) this.sceneManager.getController(SceneEnum.BOARD);
+        boardController.startNewGame();
         sceneManager.switchScene(SceneEnum.BOARD);
     }
     @FXML
