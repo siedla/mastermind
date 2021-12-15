@@ -5,13 +5,13 @@ import pl.edu.agh.to.mastermind.model.user.User;
 
 public class Session {
     private  User user;
-    private static Game game;
+    private Game game;
 
     public Session(){}
 
 
     public Game newGame() {
-        Session.game = new Game();
+        this.game = new Game();
         return game;
     }
 
