@@ -12,6 +12,7 @@ public enum Colors {
     BLUE(Color.BLUE),
     YELLOW(Color.YELLOW),
     ORANGE(Color.ORANGE),
+    PURPLE(Color.PURPLE),
     BLACK(Color.BLACK),
     WHITE(Color.WHITE);
 

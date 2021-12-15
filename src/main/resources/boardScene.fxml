@@ -14,6 +14,8 @@
       <Circle fx:id="c1" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="c2" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="c3" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="c4" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="c5" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
    </VBox>
    <VBox prefHeight="200.0" prefWidth="400.0">
       <children>
@@ -103,82 +105,82 @@
       <children>
          <AnchorPane fx:id="guess9" prefHeight="200.0" prefWidth="200.0">
             <children>
-               <Circle  layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
             </children>
          </AnchorPane>
          <AnchorPane fx:id="guess8" prefHeight="200.0" prefWidth="200.0">
             <children>
-               <Circle  layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
             </children>
          </AnchorPane>
          <AnchorPane fx:id="guess7" prefHeight="200.0" prefWidth="200.0">
             <children>
-               <Circle  layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
             </children>
          </AnchorPane>
          <AnchorPane fx:id="guess6" prefHeight="200.0" prefWidth="200.0">
             <children>
-               <Circle  layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
             </children>
          </AnchorPane>
          <AnchorPane fx:id="guess5" prefHeight="200.0" prefWidth="200.0">
             <children>
-               <Circle  layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
             </children>
          </AnchorPane>
          <AnchorPane fx:id="guess4" prefHeight="200.0" prefWidth="200.0">
             <children>
-               <Circle  layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
             </children>
          </AnchorPane>
          <AnchorPane fx:id="guess3" prefHeight="200.0" prefWidth="200.0">
             <children>
-               <Circle  layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
             </children>
          </AnchorPane>
          <AnchorPane fx:id="guess2" prefHeight="200.0" prefWidth="200.0">
             <children>
-               <Circle  layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
             </children>
          </AnchorPane>
          <AnchorPane fx:id="guess1" prefHeight="200.0" prefWidth="200.0">
             <children>
-               <Circle  layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
             </children>
          </AnchorPane>
          <AnchorPane fx:id="guess0" prefHeight="200.0" prefWidth="200.0">
             <children>
-               <Circle  layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle  layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="24.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="64.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="105.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+               <Circle layoutX="147.0" layoutY="45.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
             </children>
          </AnchorPane>
       </children></VBox>

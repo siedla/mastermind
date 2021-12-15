@@ -14,7 +14,7 @@
             <Font size="27.0" />
          </font>
       </Label>
-      <ChoiceBox layoutX="150.0" layoutY="102.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="difficulty" layoutX="150.0" layoutY="102.0" prefWidth="150.0" />
       <Label layoutX="32.0" layoutY="106.0" prefHeight="17.0" prefWidth="102.0" text="Difficulty" />
       <Button layoutX="43.0" layoutY="319.0" mnemonicParsing="false" prefHeight="25.0" onAction="#onApplyClick" prefWidth="80.0" text="Apply" />
    </children>

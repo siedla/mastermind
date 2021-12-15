@@ -45,6 +45,7 @@ public class BoardController extends Controller{
     @FXML private Circle c2;
     @FXML private Circle c3;
     @FXML private Circle c4;
+    @FXML private Circle c5;
 
     @FXML private AnchorPane[] attempt;
     @FXML private AnchorPane[] guess;
@@ -164,11 +165,15 @@ public class BoardController extends Controller{
         c1.setFill(Colors.YELLOW.getValue());
         c2.setFill(Colors.GREEN.getValue());
         c3.setFill(Colors.RED.getValue());
+        c4.setFill(Colors.ORANGE.getValue());
+        c5.setFill(Colors.PURPLE.getValue());
 
         selectListener(c0, 0);
         selectListener(c1, 1);
         selectListener(c2, 2);
         selectListener(c3, 3);
+        selectListener(c4, 4);
+        selectListener(c5, 5);
 
         attempt = new AnchorPane[]{try0, try1, try2, try3, try4, try5, try6, try7, try8, try9};
         guess = new AnchorPane[]{guess0, guess1, guess2, guess3, guess4, guess5, guess6, guess7,
@@ -188,6 +193,14 @@ public class BoardController extends Controller{
         cleanScreenState();
         var session = sceneManager.getSession();
         this.game = session.newGame();
+        System.out.println(session.getDifficulty());
+        if(session.getDifficulty().equals(Difficulty.EASY)){
+            c4.setVisible(false);
+            c5.setVisible(false);
+        }
+        else if(session.getDifficulty().equals(Difficulty.MEDIUM)){
+            c5.setVisible(false);
+        }
     }
 
     public void setGame(Game game) {
@@ -213,6 +226,8 @@ public class BoardController extends Controller{
                 c1.setEffect(null);
                 c2.setEffect(null);
                 c3.setEffect(null);
+                c4.setEffect(null);
+                c5.setEffect(null);
             }
             if(i==0) {
                 selectedColor = c0.getFill();
@@ -230,7 +245,14 @@ public class BoardController extends Controller{
                 selectedColor = c3.getFill();
                 c3.setEffect(new DropShadow(40, Color.BLACK));
             }
-
+            if(i==4) {
+                selectedColor = c4.getFill();
+                c4.setEffect(new DropShadow(40, Color.BLACK));
+            }
+            if(i==5) {
+                selectedColor = c5.getFill();
+                c5.setEffect(new DropShadow(40, Color.BLACK));
+            }
         });
 
     }
