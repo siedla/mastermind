@@ -81,7 +81,7 @@ public class BoardController extends Controller{
     }
 
     @FXML
-    private void onEndRoundButtonClick(ActionEvent event){
+    private void onEndRoundButtonClick(ActionEvent event) throws Exception {
 
         boolean allSelected = true;
         System.out.println(game.getCurrentRound()-1);
@@ -119,22 +119,24 @@ public class BoardController extends Controller{
             if (CurrentGuess.getGuessedCorrectly() == 4) {
 
                 Alert dialogBox = new Alert(Alert.AlertType.INFORMATION);
-                dialogBox.setTitle("Gratulacje! :)");
-                dialogBox.setHeaderText("Wygrales!");
-                dialogBox.setContentText("Odalo Ci sie wygrac za proba numer "+game.getCurrentRound());
+                dialogBox.setTitle("Congratulations! :)");
+                dialogBox.setHeaderText("You win!");
+                dialogBox.setContentText("You managed to win in round "+game.getCurrentRound());
 
                 dialogBox.showAndWait();
                 endRoundButton.setVisible(false);
+                sceneManager.switchScene(SceneEnum.MENU);
             }
 
             else if (game.getCurrentRound() == 10 && CurrentGuess.getGuessedCorrectly() != 4) {
 
                 Alert dialogBox = new Alert(Alert.AlertType.INFORMATION);
-                dialogBox.setTitle("Przegrana!");
-                dialogBox.setHeaderText("Przegrales!");
-                dialogBox.setContentText("Niestety nie udalo Ci sie odgadnac kodu. Sprobuj jeszcze raz!");
+                dialogBox.setTitle("Game over!");
+                dialogBox.setHeaderText("You lose!");
+                dialogBox.setContentText("You failed to guess the code. Try again!");
                 dialogBox.showAndWait();
                 endRoundButton.setVisible(false);
+                sceneManager.switchScene(SceneEnum.MENU);
             }
 
             else game.nextRound(new Round(code, CurrentGuess));

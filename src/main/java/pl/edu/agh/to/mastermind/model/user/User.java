@@ -54,12 +54,34 @@ public class User {
 //        }
 //    }
 
+    public static User getUserByEmail(String email) throws UserManagementException, SQLException{
+        try (Connection connection = getConnection()) {
+            conn = connection;
+            try (Statement st = conn.createStatement()) {
+                String query = "select * from Users where email_address = '" + email + "'";
+                try (ResultSet rs = st.executeQuery(query)) {
+                    if (rs.next()){
+                        User user = new User();
+                        user.id = rs.getInt(1);
+                        user.firstName = rs.getString(2);
+                        user.lastName = rs.getString(3);
+                        user.email = email;
+                        return user;
+                    } else {
+                        throw new UserManagementException("There is no user with such email");
+                    }
+                }
+            }
+        }
+    }
+
     public static boolean checkPasswordMatch(String email, String password) throws SQLException, NoSuchAlgorithmException, UserManagementException {
         return Objects.equals(getPasswordHash(email), hash(password));
     }
     
     public static String getPasswordHash(String email) throws SQLException, UserManagementException {
         try (Connection connection = getConnection()) {
+            conn = connection;
             try (Statement st = conn.createStatement()) {
                 String query = "select password_hash from Users where email_address = '" + email + "'";
                 try (ResultSet rs = st.executeQuery(query)) {
@@ -123,4 +145,15 @@ public class User {
         return "";
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }

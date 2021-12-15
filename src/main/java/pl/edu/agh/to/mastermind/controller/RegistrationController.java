@@ -53,8 +53,9 @@ public class RegistrationController extends Controller{
                 alert.setContentText(e.toString());
             }
             if (user != null){
-                alert.setAlertType(Alert.AlertType.CONFIRMATION);
-                alert.setContentText("User registered successfully.");
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setContentText("Registered successfully. You may log in now.");
+                sceneManager.switchScene(SceneEnum.LOGIN);
             }
             alert.show();
         }
