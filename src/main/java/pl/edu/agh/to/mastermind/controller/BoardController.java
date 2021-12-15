@@ -202,9 +202,11 @@ public class BoardController extends Controller{
 
     public void startNewGame() {
         cleanScreenState();
+        endRoundButton.setVisible(true);
         var session = sceneManager.getSession();
         this.game = session.newGame();
-        System.out.println(session.getDifficulty());
+        c4.setVisible(true);
+        c5.setVisible(true);
         if(session.getDifficulty().equals(Difficulty.EASY)){
             c4.setVisible(false);
             c5.setVisible(false);
