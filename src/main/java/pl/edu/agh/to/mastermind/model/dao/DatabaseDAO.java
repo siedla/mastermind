@@ -24,8 +24,9 @@ public class DatabaseDAO implements DAO {
         final var userID = gameSession.getUser().getId();
         final var numberOfRounds = gameSession.getGame().getCurrentRound();
         final var difficulty = gameSession.getDifficulty();
+        final var result = finalResult==0?0:1;
         String query = "insert into Games (UserID, number_of_rounds, game_won, difficulty)"
-                + "values ('" + userID + "', '" + numberOfRounds + "', '" + finalResult + "', '" + difficulty + "')";
+                + "values ('" + userID + "', '" + numberOfRounds + "', '" + result + "', '" + difficulty + "')";
         try {
             PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.executeUpdate();
