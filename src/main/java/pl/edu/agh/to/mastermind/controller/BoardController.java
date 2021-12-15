@@ -125,7 +125,7 @@ public class BoardController extends Controller{
                 endRoundButton.setVisible(false);
             }
 
-            if (game.getCurrentRound() == 10 && CurrentGuess.getGuessedCorrectly() != 4) {
+            else if (game.getCurrentRound() == 10 && CurrentGuess.getGuessedCorrectly() != 4) {
 
                 Alert dialogBox = new Alert(Alert.AlertType.INFORMATION);
                 dialogBox.setTitle("Przegrana!");
@@ -135,7 +135,7 @@ public class BoardController extends Controller{
                 endRoundButton.setVisible(false);
             }
 
-            game.nextRound(new Round(code, CurrentGuess));
+            else game.nextRound(new Round(code, CurrentGuess));
         }
     }
 
