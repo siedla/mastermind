@@ -6,12 +6,9 @@ import pl.edu.agh.to.mastermind.controller.BoardController;
 import pl.edu.agh.to.mastermind.controller.SceneEnum;
 import pl.edu.agh.to.mastermind.controller.SceneManager;
 import pl.edu.agh.to.mastermind.model.Session;
+import pl.edu.agh.to.mastermind.model.user.User;
 import pl.edu.agh.to.mastermind.model.game.Game;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.logging.Logger;
 
 public class MastermindApplication extends Application {
@@ -20,20 +17,10 @@ public class MastermindApplication extends Application {
     private SceneManager sceneManager;
 
 
-    public static void main(String[] args) {
-
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con= DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/pmakarew","pmakarew","tMiKdJD9H9zKZbTn");
-            //here sonoo is database name, root is username and password
-            Statement stmt=con.createStatement();
-            ResultSet rs=stmt.executeQuery("select * from emp");
-            while(rs.next())
-                System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));
-            con.close();
-        }catch(Exception e){ System.out.println(e);}
-
+    public static void main(String[] args) throws Exception {
+//        User.register("Jerzy","Nowak","jnow2ak@nn.pl", "blea");
+//        User.register("Ernest","Kowal","eko2wal@nn.pl", "dfda");
+//        User.register("Jakub","Nowak","jak2nowak@nn.pl", "asfd");
         Application.launch(args);
     }
 

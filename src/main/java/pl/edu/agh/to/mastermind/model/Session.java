@@ -1,9 +1,10 @@
 package pl.edu.agh.to.mastermind.model;
 
 import pl.edu.agh.to.mastermind.model.game.Game;
+import pl.edu.agh.to.mastermind.model.user.User;
 
 public class Session {
-    private Player player;
+    private User user;
     private Game game;
 
     public Session(){}
