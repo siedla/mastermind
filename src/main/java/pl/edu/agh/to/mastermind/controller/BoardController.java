@@ -5,8 +5,10 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import pl.edu.agh.to.mastermind.model.Session;
@@ -111,6 +113,28 @@ public class BoardController extends Controller{
             for(int i=CurrentGuess.getGuessedCorrectly(); i<CurrentGuess.getGuessedInDifferentPlace()+CurrentGuess.getGuessedCorrectly(); i++){
                 ((Circle) guess[game.getCurrentRound()-1].getChildren().get(i)).setFill(Colors.WHITE.getValue());
             }
+
+            if (CurrentGuess.getGuessedCorrectly() == 4) {
+
+                Alert dialogBox = new Alert(Alert.AlertType.INFORMATION);
+                dialogBox.setTitle("Gratulacje! :)");
+                dialogBox.setHeaderText("Wygrales!");
+                dialogBox.setContentText("Odalo Ci sie wygrac za proba numer "+game.getCurrentRound());
+
+                dialogBox.showAndWait();
+                endRoundButton.setVisible(false);
+            }
+
+            if (game.getCurrentRound() == 10 && CurrentGuess.getGuessedCorrectly() != 4) {
+
+                Alert dialogBox = new Alert(Alert.AlertType.INFORMATION);
+                dialogBox.setTitle("Przegrana!");
+                dialogBox.setHeaderText("Przegrales!");
+                dialogBox.setContentText("Niestety nie udalo Ci sie odgadnac kodu. Sprobuj jeszcze raz!");
+                dialogBox.showAndWait();
+                endRoundButton.setVisible(false);
+            }
+
             game.nextRound(new Round(code, CurrentGuess));
         }
     }
