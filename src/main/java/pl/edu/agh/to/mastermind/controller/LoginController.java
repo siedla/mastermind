@@ -3,7 +3,6 @@ package pl.edu.agh.to.mastermind.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import pl.edu.agh.to.mastermind.model.Session;
@@ -13,10 +12,9 @@ import pl.edu.agh.to.mastermind.model.user.UserManagementException;
 public class LoginController extends Controller{
 
     @FXML
-    private PasswordField passwordField;
-
-    @FXML
     private TextField emailField;
+    @FXML
+    private PasswordField passwordField;
 
     @FXML
     private void onLogInClick(ActionEvent event) throws Exception {

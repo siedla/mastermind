@@ -21,15 +21,16 @@
          </font>
          </Label>
       </HBox>
-            <Label  layoutY="101.0"  text="Login" >
+            <Label  layoutX="101.0"  text="Login" >
                   <font>
                            <Font name="System Bold" size="20.0" />
                         </font>
             </Label>
       </VBox>
-      <Button layoutX="318.0" layoutY="185.0" mnemonicParsing="false" onAction="#onLogInClick" text="Log in" />
-      <Button layoutX="22.0" layoutY="185.0" mnemonicParsing="false" onAction="#onSignInClick" text="Register" />
+
       <Label layoutX="22.0" layoutY="101.0" prefHeight="25.0" prefWidth="95.0" text="Email:" />
       <Label layoutX="22.0" layoutY="147.0" prefHeight="25.0" prefWidth="95.0" text="Password:" />
+            <Button layoutX="318.0" layoutY="185.0" mnemonicParsing="false" onAction="#onLogInClick" text="Log in" />
+            <Button layoutX="22.0" layoutY="185.0" mnemonicParsing="false" onAction="#onSignInClick" text="Register" />
    </children>
 </Pane>
