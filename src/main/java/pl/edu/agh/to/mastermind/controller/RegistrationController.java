@@ -14,7 +14,10 @@ public class RegistrationController extends Controller{
     private TextField emailField;
 
     @FXML
-    private TextField usernameField;
+    private TextField firstnameField;
+
+    @FXML
+    private TextField lastnameField;
 
     @FXML
     private void onSignInClick(ActionEvent event) throws Exception {

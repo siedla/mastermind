@@ -12,7 +12,7 @@ public class LoginController extends Controller{
     private PasswordField passwordField;
 
     @FXML
-    private TextField usernameField;
+    private TextField emailField;
 
     @FXML
     private void onLogInClick(ActionEvent event) throws Exception {
