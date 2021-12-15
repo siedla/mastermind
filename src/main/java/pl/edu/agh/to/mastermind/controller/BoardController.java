@@ -21,7 +21,6 @@ import java.util.LinkedList;
 public class BoardController extends Controller{
 
     private Game game;
-    private Session session;
 
     public BoardController() {
     }
@@ -154,7 +153,7 @@ public class BoardController extends Controller{
 
     @FXML
     private void onNewGameButtonClick(ActionEvent event){
-        cleanScreenState();
+        startNewGame();
     }
 
 
@@ -187,14 +186,12 @@ public class BoardController extends Controller{
 
     public void startNewGame() {
         cleanScreenState();
-        this.game = this.session.newGame();
+        var session = sceneManager.getSession();
+        this.game = session.newGame();
     }
 
     public void setGame(Game game) {
         this.game = game;
-    }
-    public void setSession(Session session) {
-        this.session = session;
     }
 
     private void markDetection(Node n, int i) {

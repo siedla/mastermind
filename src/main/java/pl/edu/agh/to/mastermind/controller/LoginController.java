@@ -23,12 +23,10 @@ public class LoginController extends Controller{
         try {
             if (User.checkPasswordMatch(email, password)) {
                 User user = User.getUserByEmail(email);
-                //Session.setUser(user);
 
                 var session = new Session();
                 session.setUser(user);
-                BoardController boardController = (BoardController) this.sceneManager.getController(SceneEnum.BOARD);
-                boardController.setSession(session);
+                sceneManager.setSession(session);
                 sceneManager.switchScene(SceneEnum.MENU);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Login succeeded");
