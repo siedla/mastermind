@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class Game {
+    public static final int maxNumberOfRounds = 10;
+
     private int currentRound = 1;
     private LinkedList<Round> rounds = new LinkedList<>();
     private Code code;

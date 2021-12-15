@@ -9,10 +9,9 @@ public class Session {
     private Game game;
     private Difficulty difficulty;
 
-    public Session(){
+    public Session() {
         this.difficulty = Difficulty.EASY;
     }
-
 
     public Game newGame() {
         this.game = new Game(this.difficulty);
@@ -23,11 +22,19 @@ public class Session {
         this.user = user;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
 
     public Difficulty getDifficulty() {
         return this.difficulty;
+    }
+
+    public Game getGame() {
+        return game;
     }
 }

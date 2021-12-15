@@ -14,6 +14,8 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import pl.edu.agh.to.mastermind.model.Session;
+import pl.edu.agh.to.mastermind.model.dao.DAO;
+import pl.edu.agh.to.mastermind.model.dao.DatabaseDAO;
 import pl.edu.agh.to.mastermind.model.game.*;
 
 import java.util.LinkedList;
@@ -21,6 +23,7 @@ import java.util.LinkedList;
 public class BoardController extends Controller{
 
     private Game game;
+    private DAO gameResultStorage = new DatabaseDAO();
 
     public BoardController() {
     }
@@ -120,7 +123,7 @@ public class BoardController extends Controller{
                 executeGameWon();
             }
 
-            else if (game.getCurrentRound() == 10 && CurrentGuess.getGuessedCorrectly() != 4) {
+            else if (game.getCurrentRound() == Game.maxNumberOfRounds && CurrentGuess.getGuessedCorrectly() != 4) {
                 executeGameLost();
             }
 
@@ -133,6 +136,7 @@ public class BoardController extends Controller{
         dialogBox.setTitle("Game over!");
         dialogBox.setHeaderText("You lose!");
         dialogBox.setContentText("You failed to guess the code. Try again!");
+        gameResultStorage.storeGameResult(sceneManager.getSession(), 0);
         dialogBox.showAndWait();
         endRoundButton.setVisible(false);
         sceneManager.switchScene(SceneEnum.MENU);
@@ -144,6 +148,7 @@ public class BoardController extends Controller{
         dialogBox.setHeaderText("You win!");
         dialogBox.setContentText("You managed to win in round "+game.getCurrentRound());
 
+        gameResultStorage.storeGameResult(sceneManager.getSession(), 1);
         dialogBox.showAndWait();
         endRoundButton.setVisible(false);
         sceneManager.switchScene(SceneEnum.MENU);
