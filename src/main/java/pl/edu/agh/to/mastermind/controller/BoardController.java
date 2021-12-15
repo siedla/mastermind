@@ -5,6 +5,8 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -198,17 +200,28 @@ public class BoardController extends Controller{
 
     private void selectListener(Node n, int i) {
         n.setOnMouseClicked(event -> {
+
+            if(selectedColor != null){
+                c0.setEffect(null);
+                c1.setEffect(null);
+                c2.setEffect(null);
+                c3.setEffect(null);
+            }
             if(i==0) {
                 selectedColor = c0.getFill();
+                c0.setEffect(new DropShadow(40, Color.BLACK));
             }
             if(i==1) {
                 selectedColor = c1.getFill();
+                c1.setEffect(new DropShadow(40, Color.BLACK));
             }
             if(i==2) {
                 selectedColor = c2.getFill();
+                c2.setEffect(new DropShadow(40, Color.BLACK));
             }
             if(i==3) {
                 selectedColor = c3.getFill();
+                c3.setEffect(new DropShadow(40, Color.BLACK));
             }
 
         });
