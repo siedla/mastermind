@@ -40,7 +40,7 @@ public class DatabaseDAO implements DAO {
     }
 
     public String getRanking(Difficulty difficulty){
-        String query = "select UserID, count(game_won) from Games where difficulty='"+difficulty.getDifficulty()+"' GROUP BY UserID DESC";
+        String query = "select UserID, count(game_won) from Games where difficulty='"+difficulty.getDifficulty()+"' GROUP BY UserID ORDER BY count(game_won) DESC";
         String result="";
         try {
             Statement stmt = connection.createStatement();
