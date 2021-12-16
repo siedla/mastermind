@@ -75,6 +75,26 @@ public class User {
         }
     }
 
+    public static User getUserByID(String id) throws UserManagementException, SQLException{
+        try (Connection connection = getConnection()) {
+            conn = connection;
+            try (Statement st = conn.createStatement()) {
+                String query = "select * from Users where userID = '"+id+"'";
+                try (ResultSet rs = st.executeQuery(query)) {
+                    if (rs.next()){
+                        User user = new User();
+                        user.id = rs.getInt(1);
+                        user.firstName = rs.getString(2);
+                        user.lastName = rs.getString(3);
+                        return user;
+                    } else {
+                        throw new UserManagementException("There is no user with such id");
+                    }
+                }
+            }
+        }
+    }
+
     public static boolean checkPasswordMatch(String email, String password) throws SQLException, NoSuchAlgorithmException, UserManagementException {
         return Objects.equals(getPasswordHash(email), hash(password));
     }

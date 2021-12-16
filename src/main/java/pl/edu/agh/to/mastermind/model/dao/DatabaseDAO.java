@@ -4,6 +4,7 @@ import pl.edu.agh.to.mastermind.model.Session;
 import pl.edu.agh.to.mastermind.model.game.Difficulty;
 import pl.edu.agh.to.mastermind.model.game.Game;
 import pl.edu.agh.to.mastermind.model.user.User;
+import pl.edu.agh.to.mastermind.model.user.UserManagementException;
 
 import javax.swing.plaf.nimbus.State;
 import java.sql.*;
@@ -49,23 +50,15 @@ public class DatabaseDAO implements DAO {
             while(rs.next()){
                     String userID = rs.getString("UserID");
                     String username="";
-/* to_fix
-                try {
-                    Statement user_stmt = connection.createStatement();
-                    ResultSet user_rs = stmt.executeQuery("select * from Users where id = '"+userID+"'");
-                    System.out.println(user_rs);
-                    while(rs.next()){
-                      String first_name=user_rs.getString("first_name");
-                      String last_name = user_rs.getString("last_name");
-                      System.out.println(first_name);
-                        username=first_name+" "+last_name;
+                    try {
+                        User user = User.getUserByID(userID);
+                        username=user.getFirstName()+" "+user.getLastName();
                     }
-                } catch (SQLException e) {
-                    System.err.println("Could not read results from database");
-                }
-*/
+                    catch(UserManagementException e){
+                        System.out.println("Cant get user with this id");
+                    }
                     String nor = rs.getString("count(game_won)");
-                    result += increment + " UserID: " + userID + " First name: "+username+" Wins: " + nor + "\n";
+                    result += increment + ". USERNAME: "+username+" WINS: " + nor + "\n";
                     increment++;
                     if(increment>=10) break;
             }
