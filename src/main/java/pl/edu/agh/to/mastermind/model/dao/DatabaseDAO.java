@@ -40,16 +40,31 @@ public class DatabaseDAO implements DAO {
     }
 
     public String getRanking(Difficulty difficulty){
-        String query = "select * from Games where difficulty='"+difficulty.getDifficulty()+"' ORDER BY game_won DESC";
+        String query = "select UserID, count(game_won) from Games where difficulty='"+difficulty.getDifficulty()+"' GROUP BY UserID DESC";
         String result="";
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             int increment = 1;
             while(rs.next()){
-                    int userID = rs.getInt("UserID");
+                    String userID = rs.getString("UserID");
                     String username="";
-                    String nor = rs.getString("game_won");
+/* to_fix
+                try {
+                    Statement user_stmt = connection.createStatement();
+                    ResultSet user_rs = stmt.executeQuery("select * from Users where id = '"+userID+"'");
+                    System.out.println(user_rs);
+                    while(rs.next()){
+                      String first_name=user_rs.getString("first_name");
+                      String last_name = user_rs.getString("last_name");
+                      System.out.println(first_name);
+                        username=first_name+" "+last_name;
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Could not read results from database");
+                }
+*/
+                    String nor = rs.getString("count(game_won)");
                     result += increment + " UserID: " + userID + " First name: "+username+" Wins: " + nor + "\n";
                     increment++;
                     if(increment>=10) break;
