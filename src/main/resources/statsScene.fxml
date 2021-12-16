@@ -11,14 +11,15 @@
 <?import javafx.scene.control.Button?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.edu.agh.to.mastermind.controller.StatsController">
    <children>
-      <TextArea layoutX="13.0" layoutY="69.0" prefHeight="300.0" prefWidth="573.0" />
-      <Label layoutX="27.0" layoutY="19.0" prefHeight="25.0" prefWidth="97.0" text="Statystyki ">
+      <Label fx:id="rankingLabel" layoutX="13.0" layoutY="69.0" prefHeight="300.0" prefWidth="573.0" />
+      <Label layoutX="27.0" layoutY="19.0" prefHeight="25.0" prefWidth="97.0" text="Ranking ">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="difficultyBox" layoutX="425.0" layoutY="24.0" prefWidth="150.0" />
-      <Label layoutX="300.0" layoutY="24.0" prefHeight="25.0" prefWidth="120.0" text="Trudność:" />
+      <Button layoutX="535.0" layoutY="24.0" mnemonicParsing="false" prefHeight="25.0" onAction="#onApplyClick" prefWidth="80.0" text="Apply" />
+      <ChoiceBox fx:id="difficulty" layoutX="425.0" layoutY="24.0" prefWidth="100.0" />
+      <Label layoutX="300.0" layoutY="24.0" prefHeight="25.0" prefWidth="120.0" text="Difficulty:" />
 
    </children>
    <Button layoutX="22.0" layoutY="370.0" mnemonicParsing="false" onAction="#onReturnClick" text="Back" />

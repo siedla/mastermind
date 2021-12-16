@@ -1,9 +1,13 @@
 package pl.edu.agh.to.mastermind.model.dao;
 
 import pl.edu.agh.to.mastermind.model.Session;
+import pl.edu.agh.to.mastermind.model.game.Difficulty;
 import pl.edu.agh.to.mastermind.model.game.Game;
+import pl.edu.agh.to.mastermind.model.user.User;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
+
 
 public class DatabaseDAO implements DAO {
     private Connection connection;
@@ -33,5 +37,26 @@ public class DatabaseDAO implements DAO {
         } catch (SQLException e) {
             System.err.println("Could not store result in database");
         }
+    }
+
+    public String getRanking(Difficulty difficulty){
+        String query = "select * from Games where difficulty='"+difficulty.getDifficulty()+"' ORDER BY game_won DESC";
+        String result="";
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            int increment = 1;
+            while(rs.next()){
+                    int userID = rs.getInt("UserID");
+                    String username="";
+                    String nor = rs.getString("game_won");
+                    result += increment + " UserID: " + userID + " First name: "+username+" Wins: " + nor + "\n";
+                    increment++;
+                    if(increment>=10) break;
+            }
+        } catch (SQLException e) {
+            System.err.println("Could not read results from database");
+        }
+        return result;
     }
 }
