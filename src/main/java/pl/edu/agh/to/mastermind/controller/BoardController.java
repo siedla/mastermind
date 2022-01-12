@@ -113,9 +113,13 @@ public class BoardController extends Controller {
                 executeGameWon();
             } else if (game.getCurrentRound() == Game.maxNumberOfRounds && CurrentGuess.getGuessedCorrectly() != 4) {
                 executeGameLost();
-            } else game.nextRound(new Round(code, CurrentGuess));
+            } else {
+                game.nextRound(new Round(code, CurrentGuess));
+                roundLabel.setText(String.valueOf(game.getCurrentRound()));
+            }
         }
     }
+
 
     private void executeGameLost() throws Exception {
         Alert dialogBox = new Alert(Alert.AlertType.INFORMATION);
@@ -233,7 +237,7 @@ public class BoardController extends Controller {
     private void addCircles(AnchorPane row) {
         int baseX = 50;
         final int numOfCircles = 4;
-        for(int i=0;i<numOfCircles;++i) {
+        for (int i = 0; i < numOfCircles; ++i) {
             Circle c = new Circle();
             c.setLayoutX(baseX);
             c.setLayoutY(46);
@@ -251,6 +255,8 @@ public class BoardController extends Controller {
         endRoundButton.setVisible(true);
         var session = sceneManager.getSession();
         this.game = session.newGame();
+        difficultyLabel.setText(session.getDifficulty().toString());
+        roundLabel.setText(String.valueOf(game.getCurrentRound()));
         c4.setVisible(true);
         c5.setVisible(true);
         if (session.getDifficulty().equals(Difficulty.EASY)) {
