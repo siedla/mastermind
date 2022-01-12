@@ -43,6 +43,8 @@ public class BoardController extends Controller {
     @FXML
     public Button newGameButton;
 
+    Circle[] colorSelectionCircles;
+
     @FXML
     private Circle c0;
     @FXML
@@ -86,40 +88,51 @@ public class BoardController extends Controller {
         }
 
         if (!allSelected) {
-            Alert dialogBox = new Alert(Alert.AlertType.ERROR);
-            dialogBox.setTitle("Error");
-            dialogBox.setHeaderText("Selection error");
-            dialogBox.setContentText("Please select a color for every circle!");
-            dialogBox.showAndWait();
+            displaySelectionAlert();
         } else {
-            LinkedList<Colors> guessedCode = new LinkedList<>();
-            for (int i = 0; i < 4; i++) {
-                Paint c = ((Circle) attemptPanes[game.getCurrentRound() - 1].getChildren().get(i)).getFill();
-                guessedCode.add(Colors.valueOf(c));
-
-            }
-            Code code = new Code(guessedCode);
-
-            GuessResult CurrentGuess = game.getCode().check(code);
-
-            for (int i = 0; i < CurrentGuess.getGuessedCorrectly(); i++) {
-                ((Circle) guessPanes[game.getCurrentRound() - 1].getChildren().get(i)).setFill(Colors.BLACK.getValue());
-            }
-            for (int i = CurrentGuess.getGuessedCorrectly(); i < CurrentGuess.getGuessedInDifferentPlace() + CurrentGuess.getGuessedCorrectly(); i++) {
-                ((Circle) guessPanes[game.getCurrentRound() - 1].getChildren().get(i)).setFill(Colors.WHITE.getValue());
-            }
-
-            if (CurrentGuess.getGuessedCorrectly() == 4) {
-                executeGameWon();
-            } else if (game.getCurrentRound() == Game.maxNumberOfRounds && CurrentGuess.getGuessedCorrectly() != 4) {
-                executeGameLost();
-            } else {
-                game.nextRound(new Round(code, CurrentGuess));
-                roundLabel.setText(String.valueOf(game.getCurrentRound()));
-            }
+            serveFinishedRound();
         }
     }
 
+    private void serveFinishedRound() throws Exception {
+        LinkedList<Colors> guessedCode = new LinkedList<>();
+        for (int i = 0; i < 4; i++) {
+            Paint c = ((Circle) attemptPanes[game.getCurrentRound() - 1].getChildren().get(i)).getFill();
+            guessedCode.add(Colors.valueOf(c));
+
+        }
+        Code code = new Code(guessedCode);
+
+        GuessResult currentGuess = game.getCode().check(code);
+
+        paintGuessResultCircles(currentGuess);
+
+        if (currentGuess.getGuessedCorrectly() == 4) {
+            executeGameWon();
+        } else if (game.getCurrentRound() == Game.maxNumberOfRounds && currentGuess.getGuessedCorrectly() != 4) {
+            executeGameLost();
+        } else {
+            game.nextRound(new Round(code, currentGuess));
+            roundLabel.setText(String.valueOf(game.getCurrentRound()));
+        }
+    }
+
+    private void paintGuessResultCircles(GuessResult currentGuess) {
+        for (int i = 0; i < currentGuess.getGuessedCorrectly(); i++) {
+            ((Circle) guessPanes[game.getCurrentRound() - 1].getChildren().get(i)).setFill(Colors.BLACK.getValue());
+        }
+        for (int i = currentGuess.getGuessedCorrectly(); i < currentGuess.getGuessedInDifferentPlace() + currentGuess.getGuessedCorrectly(); i++) {
+            ((Circle) guessPanes[game.getCurrentRound() - 1].getChildren().get(i)).setFill(Colors.WHITE.getValue());
+        }
+    }
+
+    private void displaySelectionAlert() {
+        Alert dialogBox = new Alert(Alert.AlertType.ERROR);
+        dialogBox.setTitle("Error");
+        dialogBox.setHeaderText("Selection error");
+        dialogBox.setContentText("Please select a color for every circle!");
+        dialogBox.showAndWait();
+    }
 
     private void executeGameLost() throws Exception {
         Alert dialogBox = new Alert(Alert.AlertType.INFORMATION);
@@ -161,33 +174,13 @@ public class BoardController extends Controller {
 
     @FXML
     public void initialize() {
-        c0.setFill(Colors.BLUE.getValue());
-        c1.setFill(Colors.YELLOW.getValue());
-        c2.setFill(Colors.GREEN.getValue());
-        c3.setFill(Colors.RED.getValue());
-        c4.setFill(Colors.ORANGE.getValue());
-        c5.setFill(Colors.PURPLE.getValue());
-
-        selectListener(c0, 0);
-        selectListener(c1, 1);
-        selectListener(c2, 2);
-        selectListener(c3, 3);
-        selectListener(c4, 4);
-        selectListener(c5, 5);
+        prepareColorSelectionCircles();
 
         prepareAttempts();
         prepareGuesses();
 
-        for (int i = 0; i < numOfRows; i++) {
-            for (int j = 0; j < attemptPanes[i].getChildren().size(); j++) {
-                ((Circle) attemptPanes[i].getChildren().get(j)).setFill(Color.LIGHTGRAY);
-                ((Circle) guessPanes[i].getChildren().get(j)).setFill(Color.DARKGRAY);
-                markDetection(attemptPanes[i].getChildren().get(j), i + 1);
-            }
-        }
+        paintAttepmtsAndGuessCircles();
 
-
-        //Stream.of(attemptPanes).forEach(System.out::println);
         for (var row : attemptPanes) {
             attempts.getChildren().add(row);
         }
@@ -195,6 +188,30 @@ public class BoardController extends Controller {
             guesses.getChildren().add(row);
         }
 
+    }
+
+    private void paintAttepmtsAndGuessCircles() {
+        for (int i = 0; i < numOfRows; i++) {
+            for (int j = 0; j < attemptPanes[i].getChildren().size(); j++) {
+                ((Circle) attemptPanes[i].getChildren().get(j)).setFill(Color.LIGHTGRAY);
+                ((Circle) guessPanes[i].getChildren().get(j)).setFill(Color.DARKGRAY);
+                markDetection(attemptPanes[i].getChildren().get(j), i + 1);
+            }
+        }
+    }
+
+    private void prepareColorSelectionCircles() {
+        c0.setFill(Colors.BLUE.getValue());
+        c1.setFill(Colors.YELLOW.getValue());
+        c2.setFill(Colors.GREEN.getValue());
+        c3.setFill(Colors.RED.getValue());
+        c4.setFill(Colors.ORANGE.getValue());
+        c5.setFill(Colors.PURPLE.getValue());
+        colorSelectionCircles = new Circle[]{c0, c1, c2, c3, c4, c5};
+
+        for (int i = 0; i < 6; i++) {
+            selectListener(colorSelectionCircles[i], i);
+        }
     }
 
     private void prepareGuesses() {
@@ -284,39 +301,11 @@ public class BoardController extends Controller {
 
     private void selectListener(Node n, int i) {
         n.setOnMouseClicked(event -> {
-
-            if (selectedColor != null) {
-                c0.setEffect(null);
-                c1.setEffect(null);
-                c2.setEffect(null);
-                c3.setEffect(null);
-                c4.setEffect(null);
-                c5.setEffect(null);
+            for (var c : colorSelectionCircles) {
+                c.setEffect(null);
             }
-            if (i == 0) {
-                selectedColor = c0.getFill();
-                c0.setEffect(new DropShadow(40, Color.BLACK));
-            }
-            if (i == 1) {
-                selectedColor = c1.getFill();
-                c1.setEffect(new DropShadow(40, Color.BLACK));
-            }
-            if (i == 2) {
-                selectedColor = c2.getFill();
-                c2.setEffect(new DropShadow(40, Color.BLACK));
-            }
-            if (i == 3) {
-                selectedColor = c3.getFill();
-                c3.setEffect(new DropShadow(40, Color.BLACK));
-            }
-            if (i == 4) {
-                selectedColor = c4.getFill();
-                c4.setEffect(new DropShadow(40, Color.BLACK));
-            }
-            if (i == 5) {
-                selectedColor = c5.getFill();
-                c5.setEffect(new DropShadow(40, Color.BLACK));
-            }
+            selectedColor = colorSelectionCircles[i].getFill();
+            colorSelectionCircles[i].setEffect(new DropShadow(40, Color.BLACK));
         });
 
     }
