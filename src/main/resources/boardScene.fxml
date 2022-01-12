@@ -17,89 +17,9 @@
       <Circle fx:id="c4" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="c5" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
    </VBox>
-   <VBox prefHeight="200.0" prefWidth="400.0">
-      <children>
-         <AnchorPane fx:id="try9" prefHeight="200.0" prefWidth="200.0">
-            <children>
-               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            </children>
-         </AnchorPane>
-         <AnchorPane fx:id="try8" prefHeight="200.0" prefWidth="200.0">
-            <children>
-               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            </children>
-         </AnchorPane>
-         <AnchorPane fx:id="try7" prefHeight="200.0" prefWidth="200.0">
-            <children>
-               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            </children>
-         </AnchorPane>
-         <AnchorPane fx:id="try6" prefHeight="200.0" prefWidth="200.0">
-            <children>
-               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            </children>
-         </AnchorPane>
-         <AnchorPane fx:id="try5" prefHeight="200.0" prefWidth="200.0">
-            <children>
-               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            </children>
-         </AnchorPane>
-         <AnchorPane fx:id="try4" prefHeight="200.0" prefWidth="200.0">
-            <children>
-               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            </children>
-         </AnchorPane>
-         <AnchorPane fx:id="try3" prefHeight="200.0" prefWidth="200.0">
-            <children>
-               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            </children>
-         </AnchorPane>
-         <AnchorPane fx:id="try2" prefHeight="200.0" prefWidth="200.0">
-            <children>
-               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            </children>
-         </AnchorPane>
-         <AnchorPane fx:id="try1" prefHeight="200.0" prefWidth="200.0">
-            <children>
-               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            </children>
-         </AnchorPane>
-         <AnchorPane fx:id="try0" prefHeight="200.0" prefWidth="200.0">
-            <children>
-               <Circle fill="WHITE" layoutX="50.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="140.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="230.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-               <Circle fill="WHITE" layoutX="320.0" layoutY="46.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            </children>
-         </AnchorPane>
-      </children></VBox>
+   <VBox fx:id="attempts" prefHeight="200.0" prefWidth="400.0">
+
+   </VBox>
 
    <VBox prefHeight="700.0" prefWidth="190.0">
       <children>

@@ -5,25 +5,27 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import pl.edu.agh.to.mastermind.model.Session;
+import javafx.scene.shape.StrokeType;
 import pl.edu.agh.to.mastermind.model.dao.DAO;
 import pl.edu.agh.to.mastermind.model.dao.DatabaseDAO;
 import pl.edu.agh.to.mastermind.model.game.*;
 
 import java.util.LinkedList;
+import java.util.stream.Stream;
 
-public class BoardController extends Controller{
+public class BoardController extends Controller {
 
     private Game game;
     private DAO gameResultStorage = new DatabaseDAO();
+
+    final int numOfRows = 6;
+
 
     public BoardController() {
     }
@@ -43,43 +45,53 @@ public class BoardController extends Controller{
     @FXML
     public Button newGameButton;
 
-    @FXML private Circle c0;
-    @FXML private Circle c1;
-    @FXML private Circle c2;
-    @FXML private Circle c3;
-    @FXML private Circle c4;
-    @FXML private Circle c5;
+    @FXML
+    private Circle c0;
+    @FXML
+    private Circle c1;
+    @FXML
+    private Circle c2;
+    @FXML
+    private Circle c3;
+    @FXML
+    private Circle c4;
+    @FXML
+    private Circle c5;
 
-    @FXML private AnchorPane[] attempt;
-    @FXML private AnchorPane[] guess;
+    @FXML
+    private VBox attempts;
 
-    @FXML private AnchorPane try0;
-    @FXML private AnchorPane try1;
-    @FXML private AnchorPane try2;
-    @FXML private AnchorPane try3;
-    @FXML private AnchorPane try4;
-    @FXML private AnchorPane try5;
-    @FXML private AnchorPane try6;
-    @FXML private AnchorPane try7;
-    @FXML private AnchorPane try8;
-    @FXML private AnchorPane try9;
+    @FXML
+    private AnchorPane[] tryRows;
+    @FXML
+    private AnchorPane[] guess;
 
-    @FXML private AnchorPane guess0;
-    @FXML private AnchorPane guess1;
-    @FXML private AnchorPane guess2;
-    @FXML private AnchorPane guess3;
-    @FXML private AnchorPane guess4;
-    @FXML private AnchorPane guess5;
-    @FXML private AnchorPane guess6;
-    @FXML private AnchorPane guess7;
-    @FXML private AnchorPane guess8;
-    @FXML private AnchorPane guess9;
+    @FXML
+    private AnchorPane guess0;
+    @FXML
+    private AnchorPane guess1;
+    @FXML
+    private AnchorPane guess2;
+    @FXML
+    private AnchorPane guess3;
+    @FXML
+    private AnchorPane guess4;
+    @FXML
+    private AnchorPane guess5;
+    @FXML
+    private AnchorPane guess6;
+    @FXML
+    private AnchorPane guess7;
+    @FXML
+    private AnchorPane guess8;
+    @FXML
+    private AnchorPane guess9;
 
 
     private Paint selectedColor;
 
     @FXML
-    private void onMenuClick(ActionEvent event) throws Exception{
+    private void onMenuClick(ActionEvent event) throws Exception {
         sceneManager.switchScene(SceneEnum.MENU);
     }
 
@@ -87,24 +99,23 @@ public class BoardController extends Controller{
     private void onEndRoundButtonClick(ActionEvent event) throws Exception {
 
         boolean allSelected = true;
-        System.out.println(game.getCurrentRound()-1);
-        for(int i=0; i<4; i++){
-            if( ((Circle) attempt[game.getCurrentRound()-1].getChildren().get(i)).getFill() == Color.LIGHTGRAY){
+        System.out.println(game.getCurrentRound() - 1);
+        for (int i = 0; i < 4; i++) {
+            if (((Circle) tryRows[game.getCurrentRound() - 1].getChildren().get(i)).getFill() == Color.LIGHTGRAY) {
                 allSelected = false;
             }
         }
 
-        if(!allSelected){
+        if (!allSelected) {
             Alert dialogBox = new Alert(Alert.AlertType.ERROR);
             dialogBox.setTitle("Error");
             dialogBox.setHeaderText("Selection error");
             dialogBox.setContentText("Please select a color for every circle!");
             dialogBox.showAndWait();
-        }
-        else{
-            LinkedList<Colors> guessedCode= new LinkedList<>();
-            for(int i=0; i<4; i++){
-                Paint c = ((Circle) attempt[game.getCurrentRound()-1].getChildren().get(i)).getFill();
+        } else {
+            LinkedList<Colors> guessedCode = new LinkedList<>();
+            for (int i = 0; i < 4; i++) {
+                Paint c = ((Circle) tryRows[game.getCurrentRound() - 1].getChildren().get(i)).getFill();
                 guessedCode.add(Colors.valueOf(c));
 
             }
@@ -112,22 +123,18 @@ public class BoardController extends Controller{
 
             GuessResult CurrentGuess = game.getCode().check(code);
 
-            for(int i=0; i<CurrentGuess.getGuessedCorrectly(); i++){
-                ((Circle) guess[game.getCurrentRound()-1].getChildren().get(i)).setFill(Colors.BLACK.getValue());
+            for (int i = 0; i < CurrentGuess.getGuessedCorrectly(); i++) {
+                ((Circle) guess[game.getCurrentRound() - 1].getChildren().get(i)).setFill(Colors.BLACK.getValue());
             }
-            for(int i=CurrentGuess.getGuessedCorrectly(); i<CurrentGuess.getGuessedInDifferentPlace()+CurrentGuess.getGuessedCorrectly(); i++){
-                ((Circle) guess[game.getCurrentRound()-1].getChildren().get(i)).setFill(Colors.WHITE.getValue());
+            for (int i = CurrentGuess.getGuessedCorrectly(); i < CurrentGuess.getGuessedInDifferentPlace() + CurrentGuess.getGuessedCorrectly(); i++) {
+                ((Circle) guess[game.getCurrentRound() - 1].getChildren().get(i)).setFill(Colors.WHITE.getValue());
             }
 
             if (CurrentGuess.getGuessedCorrectly() == 4) {
                 executeGameWon();
-            }
-
-            else if (game.getCurrentRound() == Game.maxNumberOfRounds && CurrentGuess.getGuessedCorrectly() != 4) {
+            } else if (game.getCurrentRound() == Game.maxNumberOfRounds && CurrentGuess.getGuessedCorrectly() != 4) {
                 executeGameLost();
-            }
-
-            else game.nextRound(new Round(code, CurrentGuess));
+            } else game.nextRound(new Round(code, CurrentGuess));
         }
     }
 
@@ -146,7 +153,7 @@ public class BoardController extends Controller{
         Alert dialogBox = new Alert(Alert.AlertType.INFORMATION);
         dialogBox.setTitle("Congratulations! :)");
         dialogBox.setHeaderText("You win!");
-        dialogBox.setContentText("You managed to win in round "+game.getCurrentRound());
+        dialogBox.setContentText("You managed to win in round " + game.getCurrentRound());
 
         gameResultStorage.storeGameResult(sceneManager.getSession(), 1);
         dialogBox.showAndWait();
@@ -154,20 +161,19 @@ public class BoardController extends Controller{
         sceneManager.switchScene(SceneEnum.MENU);
     }
 
-    private void cleanScreenState(){
-        for(int i=0; i<10; i++){
-            for(int j=0; j<attempt[i].getChildren().size(); j++){
-                ((Circle)attempt[i].getChildren().get(j)).setFill(Color.LIGHTGRAY);
-                ((Circle)guess[i].getChildren().get(j)).setFill(Color.DARKGRAY);
+    private void cleanScreenState() {
+        for (int i = 0; i < numOfRows; i++) {
+            for (int j = 0; j < tryRows[i].getChildren().size(); j++) {
+                ((Circle) tryRows[i].getChildren().get(j)).setFill(Color.LIGHTGRAY);
+                ((Circle) guess[i].getChildren().get(j)).setFill(Color.DARKGRAY);
             }
         }
     }
 
     @FXML
-    private void onNewGameButtonClick(ActionEvent event){
+    private void onNewGameButtonClick(ActionEvent event) {
         startNewGame();
     }
-
 
 
     @FXML
@@ -186,18 +192,52 @@ public class BoardController extends Controller{
         selectListener(c4, 4);
         selectListener(c5, 5);
 
-        attempt = new AnchorPane[]{try0, try1, try2, try3, try4, try5, try6, try7, try8, try9};
+        prepareAttempts();
+
         guess = new AnchorPane[]{guess0, guess1, guess2, guess3, guess4, guess5, guess6, guess7,
                 guess8, guess9};
 
-        for(int i=0; i<10; i++){
-            for(int j=0; j<attempt[i].getChildren().size(); j++){
-                ((Circle)attempt[i].getChildren().get(j)).setFill(Color.LIGHTGRAY);
-                ((Circle)guess[i].getChildren().get(j)).setFill(Color.DARKGRAY);
-                markDetection(attempt[i].getChildren().get(j), i+1);
+        for (int i = 0; i < numOfRows; i++) {
+            for (int j = 0; j < tryRows[i].getChildren().size(); j++) {
+                ((Circle) tryRows[i].getChildren().get(j)).setFill(Color.LIGHTGRAY);
+                ((Circle) guess[i].getChildren().get(j)).setFill(Color.DARKGRAY);
+                markDetection(tryRows[i].getChildren().get(j), i + 1);
             }
         }
 
+
+        Stream.of(tryRows).forEach(System.out::println);
+        for (var row : tryRows) {
+            attempts.getChildren().add(row);
+        }
+
+    }
+
+    private void prepareAttempts() {
+        tryRows = new AnchorPane[numOfRows];
+        for (int i = 0; i < numOfRows; i++) {
+            tryRows[i] = new AnchorPane();
+            var row = tryRows[i];
+            row.setPrefHeight(200);
+            row.setPrefWidth(200);
+            addCircles(row);
+        }
+    }
+
+    private void addCircles(AnchorPane row) {
+        int baseX = 50;
+        final int numOfCircles = 4;
+        for(int i=0;i<numOfCircles;++i) {
+            Circle c = new Circle();
+            c.setLayoutX(baseX);
+            c.setLayoutY(46);
+            c.setRadius(20);
+            c.setFill(Color.WHITE);
+            c.setStroke(Color.BLACK);
+            c.setStrokeType(StrokeType.INSIDE);
+            baseX += 90;
+            row.getChildren().add(c);
+        }
     }
 
     public void startNewGame() {
@@ -207,11 +247,10 @@ public class BoardController extends Controller{
         this.game = session.newGame();
         c4.setVisible(true);
         c5.setVisible(true);
-        if(session.getDifficulty().equals(Difficulty.EASY)){
+        if (session.getDifficulty().equals(Difficulty.EASY)) {
             c4.setVisible(false);
             c5.setVisible(false);
-        }
-        else if(session.getDifficulty().equals(Difficulty.MEDIUM)){
+        } else if (session.getDifficulty().equals(Difficulty.MEDIUM)) {
             c5.setVisible(false);
         }
     }
@@ -222,7 +261,7 @@ public class BoardController extends Controller{
 
     private void markDetection(Node n, int i) {
         n.setOnMouseClicked(event -> {
-            if(i == game.getCurrentRound() && selectedColor!=null){
+            if (i == game.getCurrentRound() && selectedColor != null) {
                 ((Circle) n).setFill(selectedColor);
 
             }
@@ -234,7 +273,7 @@ public class BoardController extends Controller{
     private void selectListener(Node n, int i) {
         n.setOnMouseClicked(event -> {
 
-            if(selectedColor != null){
+            if (selectedColor != null) {
                 c0.setEffect(null);
                 c1.setEffect(null);
                 c2.setEffect(null);
@@ -242,27 +281,27 @@ public class BoardController extends Controller{
                 c4.setEffect(null);
                 c5.setEffect(null);
             }
-            if(i==0) {
+            if (i == 0) {
                 selectedColor = c0.getFill();
                 c0.setEffect(new DropShadow(40, Color.BLACK));
             }
-            if(i==1) {
+            if (i == 1) {
                 selectedColor = c1.getFill();
                 c1.setEffect(new DropShadow(40, Color.BLACK));
             }
-            if(i==2) {
+            if (i == 2) {
                 selectedColor = c2.getFill();
                 c2.setEffect(new DropShadow(40, Color.BLACK));
             }
-            if(i==3) {
+            if (i == 3) {
                 selectedColor = c3.getFill();
                 c3.setEffect(new DropShadow(40, Color.BLACK));
             }
-            if(i==4) {
+            if (i == 4) {
                 selectedColor = c4.getFill();
                 c4.setEffect(new DropShadow(40, Color.BLACK));
             }
-            if(i==5) {
+            if (i == 5) {
                 selectedColor = c5.getFill();
                 c5.setEffect(new DropShadow(40, Color.BLACK));
             }
