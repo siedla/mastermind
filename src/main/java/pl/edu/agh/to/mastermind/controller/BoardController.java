@@ -32,9 +32,6 @@ public class BoardController extends Controller {
     private Label difficultyLabel;
 
     @FXML
-    private Label gameTimeLabel;
-
-    @FXML
     private Label roundLabel;
 
     @FXML

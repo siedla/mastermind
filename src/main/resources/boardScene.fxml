@@ -21,11 +21,7 @@
 
    <VBox fx:id="guesses" prefHeight="700.0" prefWidth="190.0">
    </VBox>
-   <VBox prefHeight="200.0" prefWidth="200.0">
-      <HBox prefHeight="30.0" prefWidth="400.0">
-         <Label text="Czas gry: " />
-         <Label fx:id="gameTimeLabel" />
-      </HBox>
+   <VBox prefHeight="150.0" prefWidth="200.0">
       <HBox prefHeight="30.0" prefWidth="400.0">
          <Label text="Runda: " />
          <Label fx:id="roundLabel" />
