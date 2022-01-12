@@ -17,14 +17,12 @@ import pl.edu.agh.to.mastermind.model.dao.DatabaseDAO;
 import pl.edu.agh.to.mastermind.model.game.*;
 
 import java.util.LinkedList;
-import java.util.stream.Stream;
 
 public class BoardController extends Controller {
-
     private Game game;
     private DAO gameResultStorage = new DatabaseDAO();
 
-    final int numOfRows = 6;
+    final int numOfRows = 10;
 
 
     public BoardController() {
@@ -60,32 +58,13 @@ public class BoardController extends Controller {
 
     @FXML
     private VBox attempts;
+    @FXML
+    public VBox guesses;
 
     @FXML
-    private AnchorPane[] tryRows;
+    private AnchorPane[] attemptPanes;
     @FXML
-    private AnchorPane[] guess;
-
-    @FXML
-    private AnchorPane guess0;
-    @FXML
-    private AnchorPane guess1;
-    @FXML
-    private AnchorPane guess2;
-    @FXML
-    private AnchorPane guess3;
-    @FXML
-    private AnchorPane guess4;
-    @FXML
-    private AnchorPane guess5;
-    @FXML
-    private AnchorPane guess6;
-    @FXML
-    private AnchorPane guess7;
-    @FXML
-    private AnchorPane guess8;
-    @FXML
-    private AnchorPane guess9;
+    private AnchorPane[] guessPanes;
 
 
     private Paint selectedColor;
@@ -101,7 +80,7 @@ public class BoardController extends Controller {
         boolean allSelected = true;
         System.out.println(game.getCurrentRound() - 1);
         for (int i = 0; i < 4; i++) {
-            if (((Circle) tryRows[game.getCurrentRound() - 1].getChildren().get(i)).getFill() == Color.LIGHTGRAY) {
+            if (((Circle) attemptPanes[game.getCurrentRound() - 1].getChildren().get(i)).getFill() == Color.LIGHTGRAY) {
                 allSelected = false;
             }
         }
@@ -115,7 +94,7 @@ public class BoardController extends Controller {
         } else {
             LinkedList<Colors> guessedCode = new LinkedList<>();
             for (int i = 0; i < 4; i++) {
-                Paint c = ((Circle) tryRows[game.getCurrentRound() - 1].getChildren().get(i)).getFill();
+                Paint c = ((Circle) attemptPanes[game.getCurrentRound() - 1].getChildren().get(i)).getFill();
                 guessedCode.add(Colors.valueOf(c));
 
             }
@@ -124,10 +103,10 @@ public class BoardController extends Controller {
             GuessResult CurrentGuess = game.getCode().check(code);
 
             for (int i = 0; i < CurrentGuess.getGuessedCorrectly(); i++) {
-                ((Circle) guess[game.getCurrentRound() - 1].getChildren().get(i)).setFill(Colors.BLACK.getValue());
+                ((Circle) guessPanes[game.getCurrentRound() - 1].getChildren().get(i)).setFill(Colors.BLACK.getValue());
             }
             for (int i = CurrentGuess.getGuessedCorrectly(); i < CurrentGuess.getGuessedInDifferentPlace() + CurrentGuess.getGuessedCorrectly(); i++) {
-                ((Circle) guess[game.getCurrentRound() - 1].getChildren().get(i)).setFill(Colors.WHITE.getValue());
+                ((Circle) guessPanes[game.getCurrentRound() - 1].getChildren().get(i)).setFill(Colors.WHITE.getValue());
             }
 
             if (CurrentGuess.getGuessedCorrectly() == 4) {
@@ -163,9 +142,9 @@ public class BoardController extends Controller {
 
     private void cleanScreenState() {
         for (int i = 0; i < numOfRows; i++) {
-            for (int j = 0; j < tryRows[i].getChildren().size(); j++) {
-                ((Circle) tryRows[i].getChildren().get(j)).setFill(Color.LIGHTGRAY);
-                ((Circle) guess[i].getChildren().get(j)).setFill(Color.DARKGRAY);
+            for (int j = 0; j < attemptPanes[i].getChildren().size(); j++) {
+                ((Circle) attemptPanes[i].getChildren().get(j)).setFill(Color.LIGHTGRAY);
+                ((Circle) guessPanes[i].getChildren().get(j)).setFill(Color.DARKGRAY);
             }
         }
     }
@@ -193,31 +172,58 @@ public class BoardController extends Controller {
         selectListener(c5, 5);
 
         prepareAttempts();
-
-        guess = new AnchorPane[]{guess0, guess1, guess2, guess3, guess4, guess5, guess6, guess7,
-                guess8, guess9};
+        prepareGuesses();
 
         for (int i = 0; i < numOfRows; i++) {
-            for (int j = 0; j < tryRows[i].getChildren().size(); j++) {
-                ((Circle) tryRows[i].getChildren().get(j)).setFill(Color.LIGHTGRAY);
-                ((Circle) guess[i].getChildren().get(j)).setFill(Color.DARKGRAY);
-                markDetection(tryRows[i].getChildren().get(j), i + 1);
+            for (int j = 0; j < attemptPanes[i].getChildren().size(); j++) {
+                ((Circle) attemptPanes[i].getChildren().get(j)).setFill(Color.LIGHTGRAY);
+                ((Circle) guessPanes[i].getChildren().get(j)).setFill(Color.DARKGRAY);
+                markDetection(attemptPanes[i].getChildren().get(j), i + 1);
             }
         }
 
 
-        Stream.of(tryRows).forEach(System.out::println);
-        for (var row : tryRows) {
+        //Stream.of(attemptPanes).forEach(System.out::println);
+        for (var row : attemptPanes) {
             attempts.getChildren().add(row);
+        }
+        for (var row : guessPanes) {
+            guesses.getChildren().add(row);
         }
 
     }
 
-    private void prepareAttempts() {
-        tryRows = new AnchorPane[numOfRows];
+    private void prepareGuesses() {
+        guessPanes = new AnchorPane[numOfRows];
         for (int i = 0; i < numOfRows; i++) {
-            tryRows[i] = new AnchorPane();
-            var row = tryRows[i];
+            guessPanes[i] = new AnchorPane();
+            var row = guessPanes[i];
+            row.setPrefWidth(200);
+            row.setPrefHeight(200);
+            addGuessCircles(row);
+        }
+    }
+
+    private void addGuessCircles(AnchorPane row) {
+        int baseX = 24;
+        final int numOfCircles = 4;
+        for (int i = 0; i < numOfCircles; i++) {
+            Circle c = new Circle();
+            c.setLayoutX(baseX);
+            c.setLayoutY(45);
+            c.setRadius(10);
+            c.setStroke(Color.BLACK);
+            c.setStrokeType(StrokeType.INSIDE);
+            baseX += 40;
+            row.getChildren().add(c);
+        }
+    }
+
+    private void prepareAttempts() {
+        attemptPanes = new AnchorPane[numOfRows];
+        for (int i = 0; i < numOfRows; i++) {
+            attemptPanes[i] = new AnchorPane();
+            var row = attemptPanes[i];
             row.setPrefHeight(200);
             row.setPrefWidth(200);
             addCircles(row);
