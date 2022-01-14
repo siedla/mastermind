@@ -41,9 +41,9 @@
            </rowConstraints>
             <children>
                <Label prefHeight="25.0" prefWidth="95.0" text="Email:" />
-               <TextField fx:id="emailField" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="244.0" promptText="e-mail" GridPane.columnIndex="1" />
+               <TextField fx:id="emailField" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#onKeyPressed" prefHeight="25.0" prefWidth="244.0" promptText="e-mail" GridPane.columnIndex="1" />
                <Label prefHeight="25.0" prefWidth="95.0" text="Password:" GridPane.rowIndex="1" />
-               <PasswordField fx:id="passwordField" prefHeight="25.0" prefWidth="244.0" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               <PasswordField fx:id="passwordField" onKeyPressed="#onKeyPressed" prefHeight="25.0" prefWidth="244.0" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Button mnemonicParsing="false" onAction="#onSignInClick" text="Register" textAlignment="CENTER" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
                         <Button mnemonicParsing="false" onAction="#onLogInClick" text="Log in" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
             </children>

@@ -40,13 +40,13 @@
             <children>
          
                <Label prefHeight="25.0" prefWidth="95.0" text="First name:" />
-               <TextField fx:id="firstnameField" promptText="firstname" GridPane.columnIndex="1" />
+               <TextField fx:id="firstnameField" onKeyPressed="#onKeyPressed" promptText="firstname" GridPane.columnIndex="1" />
                <Label prefHeight="25.0" prefWidth="95.0" text="Last name:" GridPane.rowIndex="1" />
-               <TextField fx:id="lastnameField" prefHeight="25.0" prefWidth="244.0" promptText="lastname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               <TextField fx:id="lastnameField" onKeyPressed="#onKeyPressed" prefHeight="25.0" prefWidth="244.0" promptText="lastname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                <Label prefHeight="25.0" prefWidth="95.0" text="E-mail:" GridPane.rowIndex="2" />
-               <TextField fx:id="emailField" prefHeight="25.0" prefWidth="244.0" promptText="e-mail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               <TextField fx:id="emailField" onKeyPressed="#onKeyPressed" prefHeight="25.0" prefWidth="244.0" promptText="e-mail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                <Label prefHeight="25.0" prefWidth="95.0" text="Password:" GridPane.rowIndex="3" />
-               <PasswordField fx:id="passwordField" prefHeight="25.0" prefWidth="244.0" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               <PasswordField fx:id="passwordField" onKeyPressed="#onKeyPressed" prefHeight="25.0" prefWidth="244.0" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                <Button mnemonicParsing="false" onAction="#onReturnClick" text="Login" GridPane.rowIndex="4" />
                <Button mnemonicParsing="false" onAction="#onRegisterClick" text="Register" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
             </children>

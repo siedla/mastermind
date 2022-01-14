@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import pl.edu.agh.to.mastermind.model.user.User;
 import pl.edu.agh.to.mastermind.model.user.UserManagementException;
 
@@ -65,5 +67,12 @@ public class RegistrationController extends Controller{
     @FXML
     private void onReturnClick(ActionEvent event) throws Exception {
         sceneManager.switchScene(SceneEnum.LOGIN);
+    }
+
+    @FXML
+    private void onKeyPressed(KeyEvent event) throws Exception {
+        if (event.getCode() == KeyCode.ENTER){
+            onRegisterClick(new ActionEvent());
+        }
     }
 }
