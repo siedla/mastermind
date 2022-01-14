@@ -47,7 +47,17 @@ public class RegistrationController extends Controller{
         } else if (lastname.equals("")){
             alert.setContentText("Lastname not specified.");
             alert.show();
-        } else {
+        } else if (!firstname.matches("^([a-z]|[A-Z])+$")){
+            alert.setContentText("Invalid firstname.");
+            alert.show();
+        } else if (!lastname.matches("^([a-z]|[A-Z])+$")){
+            alert.setContentText("Invalid lastname.");
+            alert.show();
+        } else if (!email.matches("^([a-z]|[A-Z]|\\.)+@([a-z]|[A-Z]|\\.)+$")){
+            alert.setContentText("Invalid email.");
+            alert.show();
+        }
+        else {
             User user = null;
             try {
                 user = User.register(firstname, lastname, email, password);
