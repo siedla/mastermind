@@ -20,6 +20,7 @@ public class MastermindApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         this.sceneManager = new SceneManager(stage);
+        stage.setTitle("MASTERMIND by Kwadratowe Kafelki");
         stage.show();
     }
 }

@@ -6,7 +6,10 @@ import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Effect;
+import javafx.scene.effect.Shadow;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -23,6 +26,11 @@ public class BoardController extends Controller {
     private DAO gameResultStorage = new DatabaseDAO();
 
     final int numOfRows = 10;
+
+    final double attemptRowWidth = 300;
+    final double guessRowWidth = 200;
+    final double rowHeight = 50;
+    final private String currentRoundAttemptBorderStyle ="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 1px;";
 
 
     public BoardController() {
@@ -96,13 +104,13 @@ public class BoardController extends Controller {
         for (int i = 0; i < 4; i++) {
             Paint c = ((Circle) attemptPanes[game.getCurrentRound() - 1].getChildren().get(i)).getFill();
             guessedCode.add(Colors.valueOf(c));
-
         }
         Code code = new Code(guessedCode);
 
         GuessResult currentGuess = game.getCode().check(code);
 
         paintGuessResultCircles(currentGuess);
+        attemptPanes[game.getCurrentRound() - 1].setStyle("-fx-background-color: inherit; -fx-border-color: inherit; -fx-border-radius: inherit;");
 
         if (currentGuess.getGuessedCorrectly() == 4) {
             executeGameWon();
@@ -111,6 +119,7 @@ public class BoardController extends Controller {
         } else {
             game.nextRound(new Round(code, currentGuess));
             roundLabel.setText(String.valueOf(game.getCurrentRound()));
+            attemptPanes[game.getCurrentRound() - 1].setStyle(currentRoundAttemptBorderStyle);
         }
     }
 
@@ -178,9 +187,7 @@ public class BoardController extends Controller {
 
         paintAttepmtsAndGuessCircles();
 
-        for (var row : attemptPanes) {
-            attempts.getChildren().add(row);
-        }
+
         for (var row : guessPanes) {
             guesses.getChildren().add(row);
         }
@@ -216,19 +223,21 @@ public class BoardController extends Controller {
         for (int i = 0; i < numOfRows; i++) {
             guessPanes[i] = new AnchorPane();
             var row = guessPanes[i];
-            row.setPrefWidth(200);
-            row.setPrefHeight(200);
+            row.setMinWidth(guessRowWidth);
+            row.setMaxWidth(guessRowWidth);
+            row.setMinHeight(rowHeight);
+            row.setMaxHeight(rowHeight);
             addGuessCircles(row);
         }
     }
 
     private void addGuessCircles(AnchorPane row) {
-        int baseX = 24;
+        int baseX = 50;
         final int numOfCircles = 4;
         for (int i = 0; i < numOfCircles; i++) {
             Circle c = new Circle();
             c.setLayoutX(baseX);
-            c.setLayoutY(45);
+            c.setLayoutY(rowHeight/2);
             c.setRadius(10);
             c.setStroke(Color.BLACK);
             c.setStrokeType(StrokeType.INSIDE);
@@ -241,25 +250,30 @@ public class BoardController extends Controller {
         attemptPanes = new AnchorPane[numOfRows];
         for (int i = 0; i < numOfRows; i++) {
             attemptPanes[i] = new AnchorPane();
+            attempts.getChildren().add(attemptPanes[i]);
             var row = attemptPanes[i];
-            row.setPrefHeight(200);
-            row.setPrefWidth(200);
+
+            row.setMinHeight(rowHeight);
+            row.setMaxHeight(rowHeight);
+            row.setMinWidth(attemptRowWidth);
+            row.setMinWidth(attemptRowWidth);
             addCircles(row);
+
         }
     }
 
     private void addCircles(AnchorPane row) {
-        int baseX = 50;
         final int numOfCircles = 4;
-        for (int i = 0; i < numOfCircles; ++i) {
+        double x = 50;
+        double x_step = (attemptRowWidth - 100.0)/3.0;
+        for (int i = 0; i < numOfCircles; ++i, x += x_step) {
             Circle c = new Circle();
-            c.setLayoutX(baseX);
-            c.setLayoutY(46);
+            c.setLayoutX(x);
+            c.setLayoutY(rowHeight/2);
             c.setRadius(20);
             c.setFill(Color.WHITE);
             c.setStroke(Color.BLACK);
             c.setStrokeType(StrokeType.INSIDE);
-            baseX += 90;
             row.getChildren().add(c);
         }
     }
@@ -279,6 +293,7 @@ public class BoardController extends Controller {
         } else if (session.getDifficulty().equals(Difficulty.MEDIUM)) {
             c5.setVisible(false);
         }
+        attemptPanes[game.getCurrentRound() - 1].setStyle(currentRoundAttemptBorderStyle);
     }
 
     public void setGame(Game game) {
@@ -289,11 +304,8 @@ public class BoardController extends Controller {
         n.setOnMouseClicked(event -> {
             if (i == game.getCurrentRound() && selectedColor != null) {
                 ((Circle) n).setFill(selectedColor);
-
             }
-
         });
-
     }
 
     private void selectListener(Node n, int i) {
