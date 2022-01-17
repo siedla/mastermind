@@ -7,6 +7,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import pl.edu.agh.to.mastermind.mail.EmailSender;
 import pl.edu.agh.to.mastermind.model.Session;
 import pl.edu.agh.to.mastermind.model.user.User;
 import pl.edu.agh.to.mastermind.model.user.UserManagementException;
@@ -22,6 +23,7 @@ public class LoginController extends Controller{
     private void onLogInClick(ActionEvent event) throws Exception {
         String email = emailField.getText();
         String password = passwordField.getText();
+
         try {
             if (User.checkPasswordMatch(email, password)) {
                 User user = User.getUserByEmail(email);

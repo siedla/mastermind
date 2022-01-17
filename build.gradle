@@ -35,4 +35,5 @@ dependencies {
     testImplementation('junit:junit:4.13')
     implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.3'
     implementation "mysql:mysql-connector-java:8.0.25"
+    implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
 }
