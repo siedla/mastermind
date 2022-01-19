@@ -44,7 +44,11 @@ public class User {
         String content = "Welcome " + user.firstName + "!\nWe're happy to welcome you in our little game.\n" +
                 "If you need anything, please contact us at kwadratowekafelki@gmail.com or just reply to this email.\n" +
                 "Regards,\nTeam KwadratoweKafelki";
-        EmailSender.sendEmail(user.email, "Registered in MasterMind!", content);
+        try {
+            EmailSender.sendEmail(user.email, "Registered in MasterMind!", content);
+        } catch (RuntimeException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
 //    public static User login(String email, String password) throws UserManagementException, SQLException, NoSuchAlgorithmException {
