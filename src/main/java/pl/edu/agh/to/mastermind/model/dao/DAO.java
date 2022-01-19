@@ -2,8 +2,13 @@ package pl.edu.agh.to.mastermind.model.dao;
 
 import pl.edu.agh.to.mastermind.model.Session;
 import pl.edu.agh.to.mastermind.model.game.Difficulty;
+import pl.edu.agh.to.mastermind.model.user.RankingRecord;
+import pl.edu.agh.to.mastermind.model.user.TimeRankingRecord;
+
+import java.util.List;
 
 public interface DAO {
     void storeGameResult(Session gameSession, int finalResult);
-    String getRanking(Difficulty difficulty);
+    List<RankingRecord> getRanking(Difficulty difficulty);
+    List<TimeRankingRecord> getTimeRanking(Difficulty difficulty);
 }

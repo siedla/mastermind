@@ -3,11 +3,15 @@ package pl.edu.agh.to.mastermind.model.dao;
 import pl.edu.agh.to.mastermind.model.Session;
 import pl.edu.agh.to.mastermind.model.game.Difficulty;
 import pl.edu.agh.to.mastermind.model.game.Game;
+import pl.edu.agh.to.mastermind.model.user.RankingRecord;
+import pl.edu.agh.to.mastermind.model.user.TimeRankingRecord;
 import pl.edu.agh.to.mastermind.model.user.User;
 import pl.edu.agh.to.mastermind.model.user.UserManagementException;
 
 import javax.swing.plaf.nimbus.State;
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class DatabaseDAO implements DAO {
@@ -40,9 +44,9 @@ public class DatabaseDAO implements DAO {
         }
     }
 
-    public String getRanking(Difficulty difficulty){
-        String query = "select UserID, count(game_won) from Games where difficulty='"+difficulty.getDifficulty()+"' GROUP BY UserID ORDER BY count(game_won) DESC";
-        String result="";
+    public List<RankingRecord> getRanking(Difficulty difficulty){
+        String query = "select UserID, count(game_won), SUM(number_of_rounds) from Games where difficulty='"+difficulty.getDifficulty()+"' AND game_won=1 GROUP BY UserID ORDER BY count(game_won) DESC";
+        List<RankingRecord> result= new LinkedList<>();
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -57,10 +61,39 @@ public class DatabaseDAO implements DAO {
                     catch(UserManagementException e){
                         System.out.println("Cant get user with this id");
                     }
-                    String nor = rs.getString("count(game_won)");
-                    result += increment + ". USERNAME: "+username+" WINS: " + nor + "\n";
+                    int nor = rs.getInt("count(game_won)");
+                    int rounds = rs.getInt("SUM(number_of_rounds)");
+                    result.add(new RankingRecord(username, nor, rounds));
                     increment++;
                     if(increment>=10) break;
+            }
+        } catch (SQLException e) {
+            System.err.println("Could not read results from database");
+        }
+        return result;
+    }
+
+    public List<TimeRankingRecord> getTimeRanking(Difficulty difficulty){
+        String query = "select UserID, duration_seconds from Games where difficulty='"+difficulty.getDifficulty()+"' AND game_won=1 ORDER BY duration_seconds DESC";
+        List<TimeRankingRecord> result= new LinkedList<>();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            int increment = 1;
+            while(rs.next()){
+                String userID = rs.getString("UserID");
+                String username="";
+                try {
+                    User user = User.getUserByID(userID);
+                    username=user.getFirstName()+" "+user.getLastName();
+                }
+                catch(UserManagementException e){
+                    System.out.println("Cant get user with this id");
+                }
+                int seconds = rs.getInt("duration_seconds");
+                result.add(new TimeRankingRecord(username, seconds));
+                increment++;
+                if(increment>=10) break;
             }
         } catch (SQLException e) {
             System.err.println("Could not read results from database");
