@@ -1,5 +1,7 @@
 package pl.edu.agh.to.mastermind.model.user;
 
+import pl.edu.agh.to.mastermind.mail.EmailSender;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -31,8 +33,18 @@ public class User {
         user.email = email;
         user.id = addUserToDatabase(firstName, lastName, email, password);
         if (user.id > 0 )
+        {
+            sendRegistrationEmail(user);
             return user;
+        }
         else throw new UserManagementException("Failed to add user to database.");
+    }
+
+    private static void sendRegistrationEmail(User user) {
+        String content = "Welcome " + user.firstName + "!\nWe're happy to welcome you in our little game.\n" +
+                "If you need anything, please contact us at kwadratowekafelki@gmail.com or just reply to this email.\n" +
+                "Regards,\nTeam KwadratoweKafelki";
+        EmailSender.sendEmail(user.email, "Registered in MasterMind!", content);
     }
 
 //    public static User login(String email, String password) throws UserManagementException, SQLException, NoSuchAlgorithmException {
