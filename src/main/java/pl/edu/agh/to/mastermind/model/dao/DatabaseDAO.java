@@ -27,6 +27,11 @@ public class DatabaseDAO implements DAO {
 
     @Override
     public void storeGameResult(Session gameSession, int finalResult) {
+        storeGameResult(gameSession, finalResult, Integer.MAX_VALUE);
+    }
+
+    @Override
+    public void storeGameResult(Session gameSession, int finalResult, long time_ms) {
         if (connection == null) {
             return;
         }
@@ -34,8 +39,9 @@ public class DatabaseDAO implements DAO {
         final var numberOfRounds = gameSession.getGame().getCurrentRound();
         final var difficulty = gameSession.getDifficulty();
         final var result = finalResult==0?0:1;
-        String query = "insert into Games (UserID, number_of_rounds, game_won, difficulty)"
-                + "values ('" + userID + "', '" + numberOfRounds + "', '" + result + "', '" + difficulty + "')";
+        final var durationSeconds = time_ms/1000;
+        String query = "insert into Games (UserID, duration_seconds, number_of_rounds, game_won, difficulty)"
+                + "values ('" + userID + "', '"+ durationSeconds + "', '" + numberOfRounds + "', '" + result + "', '" + difficulty + "')";
         try {
             PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.executeUpdate();

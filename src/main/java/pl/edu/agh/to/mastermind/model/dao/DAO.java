@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface DAO {
     void storeGameResult(Session gameSession, int finalResult);
+    void storeGameResult(Session gameSession, int finalResult, long time_ms);
     List<RankingRecord> getRanking(Difficulty difficulty);
     List<TimeRankingRecord> getTimeRanking(Difficulty difficulty);
 }

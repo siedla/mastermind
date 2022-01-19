@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeType;
+import pl.edu.agh.to.mastermind.model.Session;
 import pl.edu.agh.to.mastermind.model.dao.DAO;
 import pl.edu.agh.to.mastermind.model.dao.DatabaseDAO;
 import pl.edu.agh.to.mastermind.model.game.*;
@@ -24,6 +25,7 @@ import java.util.LinkedList;
 public class BoardController extends Controller {
     private Game game;
     private DAO gameResultStorage = new DatabaseDAO();
+    private Stopwatch stopwatch;
 
     final int numOfRows = 10;
 
@@ -145,10 +147,20 @@ public class BoardController extends Controller {
         dialogBox.setTitle("Game over!");
         dialogBox.setHeaderText("You lose!");
         dialogBox.setContentText("You failed to guess the code. Try again!");
-        gameResultStorage.storeGameResult(sceneManager.getSession(), 0);
+        finalizeGame(dialogBox, 0);
+    }
+
+    private void finalizeGame(Alert dialogBox, int result) throws Exception {
+        var timeTaken = stopAndMeasureTime();
+        gameResultStorage.storeGameResult(sceneManager.getSession(), result, timeTaken);
         dialogBox.showAndWait();
         endRoundButton.setVisible(false);
         sceneManager.switchScene(SceneEnum.MENU);
+    }
+
+    private long stopAndMeasureTime() {
+        stopwatch.stop();
+        return stopwatch.getTimeElapsed();
     }
 
     private void executeGameWon() throws Exception {
@@ -156,11 +168,7 @@ public class BoardController extends Controller {
         dialogBox.setTitle("Congratulations! :)");
         dialogBox.setHeaderText("You win!");
         dialogBox.setContentText("You managed to win in round " + game.getCurrentRound());
-
-        gameResultStorage.storeGameResult(sceneManager.getSession(), 1);
-        dialogBox.showAndWait();
-        endRoundButton.setVisible(false);
-        sceneManager.switchScene(SceneEnum.MENU);
+        finalizeGame(dialogBox, 1);
     }
 
     private void cleanScreenState() {
@@ -285,6 +293,17 @@ public class BoardController extends Controller {
         this.game = session.newGame();
         difficultyLabel.setText(session.getDifficulty().toString());
         roundLabel.setText(String.valueOf(game.getCurrentRound()));
+        setColorSelectionVisibility(session);
+        attemptPanes[game.getCurrentRound() - 1].setStyle(currentRoundAttemptBorderStyle);
+        startTimeMeasurement();
+    }
+
+    private void startTimeMeasurement() {
+        stopwatch = new Stopwatch();
+        stopwatch.start();
+    }
+
+    private void setColorSelectionVisibility(Session session) {
         c4.setVisible(true);
         c5.setVisible(true);
         if (session.getDifficulty().equals(Difficulty.EASY)) {
@@ -293,7 +312,6 @@ public class BoardController extends Controller {
         } else if (session.getDifficulty().equals(Difficulty.MEDIUM)) {
             c5.setVisible(false);
         }
-        attemptPanes[game.getCurrentRound() - 1].setStyle(currentRoundAttemptBorderStyle);
     }
 
     public void setGame(Game game) {
