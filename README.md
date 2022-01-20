@@ -69,3 +69,8 @@ Model-View-Controller.
 ## 5. Pakiet controller
 
 ![img_16.png](README_images/img_16.png){width=600px}
+
+## 6. Pakiet mail
+
+![img_17.png](README_images/img_17.png){width=600px}
+
