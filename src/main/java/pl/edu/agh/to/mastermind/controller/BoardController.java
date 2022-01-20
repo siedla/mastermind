@@ -143,6 +143,7 @@ public class BoardController extends Controller {
     }
 
     private void executeGameLost() throws Exception {
+        stopwatch.stop();
         Alert dialogBox = new Alert(Alert.AlertType.INFORMATION);
         dialogBox.setTitle("Game over!");
         dialogBox.setHeaderText("You lose!");
@@ -151,19 +152,16 @@ public class BoardController extends Controller {
     }
 
     private void finalizeGame(Alert dialogBox, int result) throws Exception {
-        var timeTaken = stopAndMeasureTime();
+        var timeTaken = stopwatch.getTimeElapsed();
         gameResultStorage.storeGameResult(sceneManager.getSession(), result, timeTaken);
         dialogBox.showAndWait();
         endRoundButton.setVisible(false);
         sceneManager.switchScene(SceneEnum.MENU);
     }
 
-    private long stopAndMeasureTime() {
-        stopwatch.stop();
-        return stopwatch.getTimeElapsed();
-    }
-
     private void executeGameWon() throws Exception {
+        stopwatch.stop();
+        new RecordEmailSender(gameResultStorage, sceneManager.getSession()).maybeSendWithTime(stopwatch.getTimeElapsed());
         Alert dialogBox = new Alert(Alert.AlertType.INFORMATION);
         dialogBox.setTitle("Congratulations! :)");
         dialogBox.setHeaderText("You win!");

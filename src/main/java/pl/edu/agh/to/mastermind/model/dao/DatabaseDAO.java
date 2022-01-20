@@ -38,10 +38,10 @@ public class DatabaseDAO implements DAO {
         final var userID = gameSession.getUser().getId();
         final var numberOfRounds = gameSession.getGame().getCurrentRound();
         final var difficulty = gameSession.getDifficulty();
-        final var result = finalResult==0?0:1;
-        final var durationSeconds = time_ms/1000;
+        final var result = finalResult == 0 ? 0 : 1;
+        final var durationSeconds = time_ms / 1000;
         String query = "insert into Games (UserID, duration_seconds, number_of_rounds, game_won, difficulty)"
-                + "values ('" + userID + "', '"+ durationSeconds + "', '" + numberOfRounds + "', '" + result + "', '" + difficulty + "')";
+                + "values ('" + userID + "', '" + durationSeconds + "', '" + numberOfRounds + "', '" + result + "', '" + difficulty + "')";
         try {
             PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.executeUpdate();
@@ -50,28 +50,27 @@ public class DatabaseDAO implements DAO {
         }
     }
 
-    public List<RankingRecord> getRanking(Difficulty difficulty){
-        String query = "select UserID, count(game_won), SUM(number_of_rounds) from Games where difficulty='"+difficulty.getDifficulty()+"' AND game_won=1 GROUP BY UserID ORDER BY count(game_won) DESC";
-        List<RankingRecord> result= new LinkedList<>();
+    public List<RankingRecord> getRanking(Difficulty difficulty) {
+        String query = "select UserID, count(game_won), SUM(number_of_rounds) from Games where difficulty='" + difficulty.getDifficulty() + "' AND game_won=1 GROUP BY UserID ORDER BY count(game_won) DESC";
+        List<RankingRecord> result = new LinkedList<>();
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             int increment = 1;
-            while(rs.next()){
-                    String userID = rs.getString("UserID");
-                    String username="";
-                    try {
-                        User user = User.getUserByID(userID);
-                        username=user.getFirstName()+" "+user.getLastName();
-                    }
-                    catch(UserManagementException e){
-                        System.out.println("Cant get user with this id");
-                    }
-                    int nor = rs.getInt("count(game_won)");
-                    int rounds = rs.getInt("SUM(number_of_rounds)");
-                    result.add(new RankingRecord(username, nor, rounds));
-                    increment++;
-                    if(increment>=10) break;
+            while (rs.next()) {
+                String userID = rs.getString("UserID");
+                String username = "";
+                try {
+                    User user = User.getUserByID(userID);
+                    username = user.getFirstName() + " " + user.getLastName();
+                } catch (UserManagementException e) {
+                    System.out.println("Cant get user with this id");
+                }
+                int nor = rs.getInt("count(game_won)");
+                int rounds = rs.getInt("SUM(number_of_rounds)");
+                result.add(new RankingRecord(username, nor, rounds));
+                increment++;
+                if (increment >= 10) break;
             }
         } catch (SQLException e) {
             System.err.println("Could not read results from database");
@@ -79,31 +78,53 @@ public class DatabaseDAO implements DAO {
         return result;
     }
 
-    public List<TimeRankingRecord> getTimeRanking(Difficulty difficulty){
-        String query = "select UserID, duration_seconds from Games where difficulty='"+difficulty.getDifficulty()+"' AND game_won=1 ORDER BY duration_seconds DESC";
-        List<TimeRankingRecord> result= new LinkedList<>();
+    public List<TimeRankingRecord> getTimeRanking(Difficulty difficulty) {
+        String query = "select UserID, duration_seconds from Games where difficulty='" + difficulty.getDifficulty() + "' AND game_won=1 ORDER BY duration_seconds DESC";
+        List<TimeRankingRecord> result = new LinkedList<>();
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             int increment = 1;
-            while(rs.next()){
+            while (rs.next()) {
                 String userID = rs.getString("UserID");
-                String username="";
+                String username = "";
                 try {
                     User user = User.getUserByID(userID);
-                    username=user.getFirstName()+" "+user.getLastName();
-                }
-                catch(UserManagementException e){
+                    username = user.getFirstName() + " " + user.getLastName();
+                } catch (UserManagementException e) {
                     System.out.println("Cant get user with this id");
                 }
                 int seconds = rs.getInt("duration_seconds");
                 result.add(new TimeRankingRecord(username, seconds));
                 increment++;
-                if(increment>=10) break;
+                if (increment >= 10) break;
             }
         } catch (SQLException e) {
             System.err.println("Could not read results from database");
         }
         return result;
+    }
+
+    @Override
+    public TimeRankingRecord getTopTimeUser(Difficulty difficulty) {
+        String query = "SELECT U.first_name, U.email_address, G.duration_seconds " +
+                "FROM Users U INNER JOIN Games G on U.UserID = G.UserID " +
+                "WHERE G.duration_seconds IS NOT NULL AND G.game_won=1" +
+                " AND G.difficulty = '"+ difficulty.getDifficulty()+
+                "' ORDER BY G.duration_seconds LIMIT 1";
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            if(rs.next())
+            {
+                var name = rs.getString("first_name");
+                var email = rs.getString("email_address");
+                var time = rs.getInt("duration_seconds");
+                return new TimeRankingRecord(name, time, email);
+            }
+        } catch (SQLException e) {
+            System.err.println("Could not grab previous user");
+        }
+        return null;
     }
 }
