@@ -7,6 +7,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class User {
     private int id;
@@ -44,11 +46,18 @@ public class User {
         String content = "Welcome " + user.firstName + "!\nWe're happy to welcome you in our little game.\n" +
                 "If you need anything, please contact us at kwadratowekafelki@gmail.com or just reply to this email.\n" +
                 "Regards,\nTeam KwadratoweKafelki";
-        try {
-            EmailSender.sendEmail(user.email, "Registered in MasterMind!", content);
-        } catch (RuntimeException e) {
-            System.err.println(e.getMessage());
-        }
+
+        ExecutorService emailExecutor = Executors.newFixedThreadPool(1);
+        emailExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    EmailSender.sendEmail(user.email, "Registered in MasterMind!", content);
+                } catch (RuntimeException e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+        });
     }
 
 //    public static User login(String email, String password) throws UserManagementException, SQLException, NoSuchAlgorithmException {
