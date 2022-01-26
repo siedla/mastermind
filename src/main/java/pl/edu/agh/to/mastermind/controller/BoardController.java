@@ -31,7 +31,7 @@ public class BoardController extends Controller {
 
     final double attemptRowWidth = 300;
     final double guessRowWidth = 200;
-    final double rowHeight = 50;
+    final double rowHeight = 70;
     final private String currentRoundAttemptBorderStyle ="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 1px;";
 
 

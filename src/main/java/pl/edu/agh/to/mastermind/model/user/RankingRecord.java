@@ -3,14 +3,12 @@ package pl.edu.agh.to.mastermind.model.user;
 public class RankingRecord {
     private final String username;
     private final int wins;
-    private final int rounds;
-    private final double ratio;
+    private final int avgrounds;
 
-    public RankingRecord(String username, int wins, int rounds){
+    public RankingRecord(String username, int wins, int avgrounds){
         this.username=username;
         this.wins=wins;
-        this.rounds=rounds;
-        this.ratio=(double) Math.round(rounds*100/wins)/100;
+        this.avgrounds=avgrounds;
     }
 
     public String getUsername(){
@@ -22,10 +20,8 @@ public class RankingRecord {
     }
 
     public int getRounds(){
-        return this.rounds;
+        return this.avgrounds;
     }
-    public double getRatio(){
-        return this.ratio;
-    }
+
 
 }

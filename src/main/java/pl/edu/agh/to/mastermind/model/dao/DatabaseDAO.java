@@ -79,7 +79,7 @@ public class DatabaseDAO implements DAO {
     }
 
     public List<TimeRankingRecord> getTimeRanking(Difficulty difficulty) {
-        String query = "select UserID, duration_seconds from Games where difficulty='" + difficulty.getDifficulty() + "' AND game_won=1 ORDER BY duration_seconds DESC";
+        String query = "select UserID, duration_seconds from Games where difficulty='" + difficulty.getDifficulty() + "' AND game_won=1 ORDER BY duration_seconds";
         List<TimeRankingRecord> result = new LinkedList<>();
         try {
             Statement stmt = connection.createStatement();

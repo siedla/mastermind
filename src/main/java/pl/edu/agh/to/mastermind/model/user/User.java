@@ -1,5 +1,6 @@
 package pl.edu.agh.to.mastermind.model.user;
 
+import javafx.application.Platform;
 import pl.edu.agh.to.mastermind.mail.EmailSender;
 
 import java.nio.charset.StandardCharsets;
@@ -47,17 +48,14 @@ public class User {
                 "If you need anything, please contact us at kwadratowekafelki@gmail.com or just reply to this email.\n" +
                 "Regards,\nTeam KwadratoweKafelki";
 
-        ExecutorService emailExecutor = Executors.newFixedThreadPool(1);
-        emailExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
+        Platform.runLater(() -> {
                 try {
                     EmailSender.sendEmail(user.email, "Registered in MasterMind!", content);
                 } catch (RuntimeException e) {
                     System.err.println(e.getMessage());
                 }
             }
-        });
+        );
     }
 
 //    public static User login(String email, String password) throws UserManagementException, SQLException, NoSuchAlgorithmException {

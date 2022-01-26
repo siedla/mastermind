@@ -34,9 +34,6 @@ public class StatsController extends Controller{
     private TableColumn<RankingRecord, Integer> roundsCol;
 
     @FXML
-    private TableColumn<RankingRecord, Double> ratioCol;
-
-    @FXML
     private TableView<TimeRankingRecord> rankingTimeTable;
 
     @FXML
@@ -65,7 +62,6 @@ public class StatsController extends Controller{
         usernameCol.setCellValueFactory(new PropertyValueFactory<RankingRecord, String>("username"));
         winsCol.setCellValueFactory(new PropertyValueFactory<RankingRecord, Integer>("wins"));
         roundsCol.setCellValueFactory(new PropertyValueFactory<RankingRecord, Integer>("rounds"));
-        ratioCol.setCellValueFactory(new PropertyValueFactory<RankingRecord, Double>("ratio"));
         usernameCol2.setCellValueFactory(new PropertyValueFactory<TimeRankingRecord, String>("username"));
         timeCol.setCellValueFactory(new PropertyValueFactory<TimeRankingRecord, Integer>("seconds"));
 
