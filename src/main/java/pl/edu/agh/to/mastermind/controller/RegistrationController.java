@@ -7,6 +7,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import pl.edu.agh.to.mastermind.mail.EmailSender;
 import pl.edu.agh.to.mastermind.model.user.User;
 import pl.edu.agh.to.mastermind.model.user.UserManagementException;
 
@@ -26,10 +27,12 @@ public class RegistrationController extends Controller{
 
     @FXML
     private TextField lastnameField;
+    
 
     @FXML
     private void onRegisterClick(ActionEvent event) throws Exception {
         String password = passwordField.getText();
+
         String email = emailField.getText();
         String firstname = firstnameField.getText();
         String lastname = lastnameField.getText();
@@ -67,6 +70,11 @@ public class RegistrationController extends Controller{
             if (user != null){
                 alert.setAlertType(Alert.AlertType.INFORMATION);
                 alert.setContentText("Registered successfully. You may log in now.");
+
+                String subject = "Rejestracja";
+                String content = "Witaj, "+firstname+" cieszymy się, że dołączyłeś do grona graczy mastermind.";
+                EmailSender.sendEmail(email, subject, content);
+
                 sceneManager.switchScene(SceneEnum.LOGIN);
             }
             alert.show();

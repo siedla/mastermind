@@ -12,6 +12,10 @@ import pl.edu.agh.to.mastermind.model.Session;
 import pl.edu.agh.to.mastermind.model.user.User;
 import pl.edu.agh.to.mastermind.model.user.UserManagementException;
 
+import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class LoginController extends Controller{
 
     @FXML
@@ -23,7 +27,6 @@ public class LoginController extends Controller{
     private void onLogInClick(ActionEvent event) throws Exception {
         String email = emailField.getText();
         String password = passwordField.getText();
-
         try {
             if (User.checkPasswordMatch(email, password)) {
                 User user = User.getUserByEmail(email);

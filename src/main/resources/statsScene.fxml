@@ -29,7 +29,7 @@
          <columns>
             <TableColumn fx:id="usernameCol" text="username">
             </TableColumn>
-             <TableColumn fx:id="roundsCol" text="rounds">
+             <TableColumn fx:id="roundsCol" text="rounds per win">
              </TableColumn>
             <TableColumn fx:id="winsCol" text="wins">
             </TableColumn>

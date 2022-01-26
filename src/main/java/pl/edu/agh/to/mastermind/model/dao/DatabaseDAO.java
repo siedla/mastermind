@@ -51,7 +51,7 @@ public class DatabaseDAO implements DAO {
     }
 
     public List<RankingRecord> getRanking(Difficulty difficulty) {
-        String query = "select UserID, count(game_won), SUM(number_of_rounds) from Games where difficulty='" + difficulty.getDifficulty() + "' AND game_won=1 GROUP BY UserID ORDER BY count(game_won) DESC";
+        String query = "select UserID, count(game_won), AVG(number_of_rounds) from Games where difficulty='" + difficulty.getDifficulty() + "' AND game_won=1 GROUP BY UserID ORDER BY count(game_won) DESC";
         List<RankingRecord> result = new LinkedList<>();
         try {
             Statement stmt = connection.createStatement();
@@ -67,7 +67,7 @@ public class DatabaseDAO implements DAO {
                     System.out.println("Cant get user with this id");
                 }
                 int nor = rs.getInt("count(game_won)");
-                int rounds = rs.getInt("SUM(number_of_rounds)");
+                int rounds = rs.getInt("AVG(number_of_rounds)");
                 result.add(new RankingRecord(username, nor, rounds));
                 increment++;
                 if (increment >= 10) break;
