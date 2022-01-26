@@ -1,5 +1,6 @@
 package pl.edu.agh.to.mastermind.controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -70,11 +71,6 @@ public class RegistrationController extends Controller{
             if (user != null){
                 alert.setAlertType(Alert.AlertType.INFORMATION);
                 alert.setContentText("Registered successfully. You may log in now.");
-
-                String subject = "Rejestracja";
-                String content = "Witaj, "+firstname+" cieszymy się, że dołączyłeś do grona graczy mastermind.";
-                EmailSender.sendEmail(email, subject, content);
-
                 sceneManager.switchScene(SceneEnum.LOGIN);
             }
             alert.show();
